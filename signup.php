@@ -10,10 +10,10 @@
     <img class = "nav-brand" src = "img/logo-old.png"/>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <ul class = "navbar-nav">
-            <li class = "nav-item active">
-                <a class = "nav-link" href = "#">Home</a>
-            </li>
             <li class = "nav-item">
+                <a class = "nav-link" href = "index.php">Home</a>
+            </li>
+            <li class = "nav-item active">
                 <a class = "nav-link" href = "signup.php">Sign Up/Login</a>
             </li>
             <li class = "nav-item">
@@ -23,7 +23,7 @@
                 <a class = "nav-link" href = "#">Careers</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Tutorial zone</a>
+                <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "#">Community</a>
@@ -32,22 +32,25 @@
     </nav>
     <br />
     <br />
-    <br />
-    <br />
 <div class = "container">
     <div class="row">
           <div class="col-lg-4">
                 <form method = "post" action = "processsignup.php">
                     <div class="form-group">
-                        <label>Username</label>
+                        <h2><u>Sign up</u></h2>
+                        <label><u>Username</u></label>
                         <input type="username" class="form-control" name = "username" placeholder="Username">
-                        <label>Password</label>
+                        <br/>
+                         <label><u>Password</u></label>
                         <input type="password" class="form-control" name = "password" placeholder="Password">
-                        <label>First name</label>
+                        <br/>
+                         <label><u>First name</u></label>
                         <input class="form-control" name = "firstname" placeholder="First name">
-                        <label>Last name</label>
+                        <br/>
+                         <label><u>Last name</u></label>
                         <input class="form-control" name = "lastname" placeholder="Last name">
-                        <label>Email address</label>
+                        <br/>
+                         <label><u>Email address</u></label>
                         <input type="email" class="form-control" name = "emailaddress" placeholder="Email address">
                     </div>
                  <button type="submit" class="btn btn-primary">Sign Up!</button>
@@ -58,9 +61,11 @@
         <div class="col-lg-4">
             <form method = "post" action = "processlogin.php">
                 <div class="form-group">
-                    <label>Username</label>
+                    <h2><u>Login</u></h2>
+                     <label><u>Username</u></label>
                     <input type="username" class="form-control" name = "username" placeholder="Username">
-                    <label>Password</label>
+                    <br/>
+                     <label><u>Password</u></label>
                     <input type="password" class="form-control" name = "password" placeholder="Password">
                 </div>
             <button type="submit" class="btn btn-primary">Login!</button>

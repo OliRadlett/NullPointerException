@@ -12,19 +12,19 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <ul class = "navbar-nav">
             <li class = "nav-item active">
-                <a class = "nav-link" href = "#">Home</a>
+                <a class = "nav-link" href = "index.php">Home</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "signup.php">Sign Up/Login</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Q&A</a>
+                <a class = "nav-link" href = "qa.php">Q&A</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "#">Careers</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Tutorial zone</a>
+                <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "#">Community</a>
@@ -33,7 +33,6 @@
         <?php
         if (isset($_SESSION["username"])) {
             echo '<ul class="navbar-nav ml-auto">';
-            echo '<li class="nav-item">';
             echo '<li class="nav-item">';
             echo '<a class="nav-link" href = "#"' . $_SESSION["username"] . '></a>';
             echo '</li>';
@@ -52,7 +51,7 @@
             <h2>Q&A</h2>
             <p>No matter your programming experience, there will always be times when mysterious bugs allude you, or strange syntax bamboozles you.</p>
             <p>NullPointerException provides a platform for you to not only ask questions, but to use your own knowledge to answer others questions.</p> 
-            <p><a class="btn btn-secondary" href="#" role="button">Go to Q&A &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="qa.php" role="button">Go to Q&A &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <h2>Careers</h2>
@@ -64,7 +63,7 @@
             <h2>Tutorial Zone</h2>
             <p>The Tutorial Zone is aimed at newer programmers looking to get ahead of the competition</p>
             <p>We have provided a collection of custom written tutorials, documentation, and useful links, esspecialy selected to make learning to code less daunting.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Go to Tutorial Zone &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="tutorial.php" role="button">Go to Tutorial Zone &raquo;</a></p>
           </div>
       </div>
 
@@ -73,4 +72,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
-</html>
