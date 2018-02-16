@@ -1,3 +1,5 @@
+<?php session_start();
+include "connect.php"; ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,10 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <link rel="stylesheet" href="stylesheets/index.css" />
+      <script type="text/javascript" src = "scripts/logo-fix.js"></script>
     <title>NullPointerException</title>
 </head>
 <body>
-    <img class = "nav-brand" src = "img/logo-old.png"/>
+    <?php $connection = connect();
+
+        if (!$connection) {
+
+            die("Connection failed: " . mysqli_connect_error());
+
+    }?>
+    <img class = "nav-brand" id = "logo" src = "img/logo-old.png"/>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <ul class = "navbar-nav">
             <li class = "nav-item active">
@@ -21,13 +31,13 @@
                 <a class = "nav-link" href = "qa.php">Q&A</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Careers</a>
+                <a class = "nav-link" href = "career.php">Careers</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Community</a>
+                <a class = "nav-link" href = "community.php">Community</a>
             </li>
         </ul>
         <?php

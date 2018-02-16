@@ -17,16 +17,16 @@
                 <a class = "nav-link" href = "signup.php">Sign Up/Login</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Q&A</a>
+                <a class = "nav-link" href = "qa.php">Q&A</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Careers</a>
+                <a class = "nav-link" href = "career.php">Careers</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Community</a>
+                <a class = "nav-link" href = "community.php">Community</a>
             </li>
         </ul>
     </nav>
