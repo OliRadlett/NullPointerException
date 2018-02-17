@@ -51,9 +51,8 @@ include "connect.php"; ?>
         if (isset($_SESSION["username"])) {
             echo '<ul class="navbar-nav ml-auto">';
             echo '<li class="nav-item">';
-            echo '<a class="nav-link" href = "#"' . $_SESSION["username"] . '></a>';
+            echo '<a class="nav-link" href = "#" id = "username">' . $_SESSION["username"] . '</a>';
             echo '</li>';
-            echo '</ul>';
         }
         ?>
     </nav>
