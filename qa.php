@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-      <link rel="stylesheet" href="stylesheets/index.css" />
+    <link rel="stylesheet" href="stylesheets/index.css" />
+    <script type="text/javascript" src = "scripts/filterQuestions.js"></script>
     <title>NullPointerException</title>
 </head>
 <body>
@@ -18,16 +19,16 @@
                 <a class = "nav-link" href = "signup.php">Sign Up/Login</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link active" href = "#">Q&A</a>
+                <a class = "nav-link active" href = "qa.php">Q&A</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Careers</a>
+                <a class = "nav-link" href = "career.php">Careers</a>
             </li>
             <li class = "nav-item">
                 <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
             </li>
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Community</a>
+                <a class = "nav-link" href = "community.php">Community</a>
             </li>
         </ul>
         <?php
@@ -45,13 +46,13 @@
     <br />
     <div class = "container">
         <div class = "row">
-            <h2>Questions</h2>
+            <h2>Featured Questions</h2>
         </div>
         <br/>
         <div class = "row">
             <div class="form-group">
                 <label>Filter questions:</label>
-                <select class="form-control">
+                <select id = "select" class="form-control" onchange = "Download()">
                     <option>Hot</option>
                     <option>Top</option>
                     <option>New</option>
@@ -60,14 +61,11 @@
             <div class = "table-responsive">
                 <table class = "table table-bordered table">
                     <thead>
-                        <tr>
-                            <th><u>Title</u></th>
-                            <th><u>Score</u></th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Test title</td>
-                        </tr>
+                        <th><u>Title</u></th>
+                        <th><u>Score</u></th>
+                    </thead>
+                    <tbody id = "questionsTable">
+                    </tbody>
                 </table>
             </div>
         </div>

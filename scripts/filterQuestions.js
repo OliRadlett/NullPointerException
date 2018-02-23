@@ -1,8 +1,16 @@
 var httpRequest;
 var url;
-var table;
 
-function Download(type) {
+window.onload = function() {
+
+    Download();
+
+}
+
+function Download() {
+
+    var select = document.getElementById("select");
+    var type = select.options[select.selectedIndex].text.toLowerCase();
 
     httpRequest = new XMLHttpRequest();
     url = "/downloadquestions.php?type=" + type;
@@ -29,49 +37,33 @@ function Output() {
             
             var request = httpRequest.response;
             var questionArray = request.split("<br/>");
-
-            table = document.getElementById("questions-container2");
             
-            while(table.hasChildNodes()) {
+            var table = document.getElementById("questionsTable");
+
+            while (table.hasChildNodes()) {
                 
-                table.removeChild(table.firstChild);
+                table.removeChild(table.lastChild);
             
             }
 
-            for (var i = 2; i < questionArray.length; i+=3) {
+            for (var i = 0; i < questionArray.length - 1; i += 3) {
 
                 var tr = document.createElement("tr");
-                var question = document.createElement("td");
-                var filler = document.createElement("td");
-                var a = document.createElement("a");
-                //var p1 = document.createElement("p");
-                var p2 = document.createElement("p");
-                var content = document.createTextNode(questionArray[i - 2]);
-                var scoreString = questionArray[i] + " votes";
-                var votes = document.createTextNode(scoreString);
-                
-                a.setAttribute("href", "/question.php?id=" + questionArray[i - 1]);
-                a.appendChild(content);
-                a.setAttribute("class", "title");
-                a.setAttribute("style", "color: blue");
-                p2.appendChild(votes);
-                p2.setAttribute("class", "votes");
-                p2.setAttribute("style", "display: inline-block");
-                //a.appendChild(p1);
-                question.appendChild(a);
-                question.appendChild(p2);
-                tr.appendChild(question);
+                var title = document.createElement("td");
+                var score = document.createElement("td");
+                var link = document.createElement("a");
+                var titleString = document.createTextNode(questionArray[i]);
+                var scoreString = document.createTextNode(questionArray[i + 2]);
+
+                link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
+                link.appendChild(titleString);
+                link.setAttribute("style", "text-decoration: none");
+                link.setAttribute("style", "color: #0078D7");
+                title.appendChild(link);
+                score.appendChild(scoreString);
+                tr.appendChild(title);
+                tr.appendChild(score);
                 table.appendChild(tr);
-
-            }
-
-            var eList = document.getElementsByClassName("votes");
-
-            for (var i = 0; i < eList.length; i++) {
-
-                var tmp = eList[i].innerHTML;
-                tmp = "&emsp;&emsp;&emsp;" + tmp;
-                eList[i].innerHTML = tmp;
 
             }
 
