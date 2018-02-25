@@ -2,3 +2,11 @@
 	text-decoration: none;
 	color: rgb(0, 123, 255);
 }
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color: black;
+  height: 1px;
+}

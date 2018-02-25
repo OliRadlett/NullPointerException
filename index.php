@@ -24,7 +24,22 @@ include "connect.php"; ?>
 
             die("Connection failed: " . mysqli_connect_error());
 
-    }?>
+        } else {
+
+            $address = $_SERVER["REMOTE_ADDR"];
+            $_SESSION["IPADDR"] = $address;
+            $date = date("d/m/Y");
+            $time = date("h:ia");
+            $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
+            
+            if (!mysqli_query($connection, $query)) {
+        
+                echo mysqli_error($connection);
+        
+            }
+            
+        }
+    ?>
     <img class = "nav-brand" id = "logo" src = "img/logo-old.png"/>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <ul class = "navbar-nav">
