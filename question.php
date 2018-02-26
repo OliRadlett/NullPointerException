@@ -19,7 +19,7 @@ include "questionFuncs.php" ?>
 
         }
     ?>
-    <img class = "nav-brand" src = "img/logo-old.png"/>
+    <img class = "nav-brand" src = "img/logo.png"/>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <ul class = "navbar-nav">
             <li class = "nav-item">
