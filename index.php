@@ -18,26 +18,20 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php $connection = connect();
+    <?php
 
-        if (!$connection) {
+    	$connection = connect();
 
-            die("Connection failed: " . mysqli_connect_error());
-
-        } else {
-
-            $address = $_SERVER["REMOTE_ADDR"];
-            $_SESSION["IPADDR"] = $address;
-            $date = date("d/m/Y");
-            $time = date("h:ia");
-            $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
-            
-            if (!mysqli_query($connection, $query)) {
+        $address = $_SERVER["REMOTE_ADDR"];
+        $_SESSION["IPADDR"] = $address;
+        $date = date("d/m/Y");
+        $time = date("h:ia");
+        $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
+         
+        if (!mysqli_query($connection, $query)) {
         
-                echo mysqli_error($connection);
+            echo mysqli_error($connection);
         
-            }
-            
         }
 
     	include ("header.html");

@@ -11,14 +11,6 @@ include "questionFuncs.php" ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php $connection = connect();
-
-        if (!$connection) {
-
-            die("Connection failed: " . mysqli_connect_error());
-
-        }
-    ?>
     <?php include ("header.html"); ?>
     <br/>
     <br/>
