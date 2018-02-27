@@ -11,46 +11,9 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <img class = "nav-brand" src = "img/logo.png"/>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <ul class = "navbar-nav">
-            <li class = "nav-item">
-                <a class = "nav-link" href = "index.php">Home</a>
-            </li>
-            <?php
-                if (isset($_SESSION["username"])) {
-                    echo '<li class = "nav-item">';
-                    echo '<a class = "nav-link" href = "account.php">' . $_SESSION["username"] . '</a>';
-                    echo '</li>';
-                } else {
-                    echo '<li class = "nav-item">';
-                    echo '<a class = "nav-link" href = "signup.php">Sign Up/Login</a>';
-                    echo '</li>';
-                }
-            ?>
-            <li class = "nav-item">
-                <a class = "nav-link active" href = "qa.php">Q&A</a>
-            </li>
-            <li class = "nav-item">
-                <a class = "nav-link" href = "career.php">Careers</a>
-            </li>
-            <li class = "nav-item">
-                <a class = "nav-link" href = "tutorial.php">Tutorial zone</a>
-            </li>
-            <li class = "nav-item">
-                <a class = "nav-link" href = "community.php">Community</a>
-            </li>
-        </ul>
-        <?php
-        if (isset($_SESSION["username"])) {
-            echo '<ul class="navbar-nav ml-auto">';
-            echo '<li class="nav-item">';
-            echo '<a class="nav-link" href = "#"' . $_SESSION["username"] . '></a>';
-            echo '</li>';
-            echo '</ul>';
-        }
-        ?>
-    </nav>
+    <?php
+    include ("header.html");
+    ?>
     <br />
     <br />
     <br />

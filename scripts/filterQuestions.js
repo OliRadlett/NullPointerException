@@ -1,11 +1,7 @@
 var httpRequest;
 var url;
 
-window.onload = function() {
-
-    Download();
-
-}
+window.onload = Download;
 
 function Download() {
 

@@ -6,8 +6,8 @@ function checkLogo() {
 
 	var width = window.innerWidth;
 	var logo = document.getElementById("logo");
-	var fullLogo = "img/logo-old.png";
-	var mobileLogo = "img/logo-old-MOBILE.png";
+	var fullLogo = "img/logo.png";
+	var mobileLogo = "img/logo-MOBILE.png";
 
 	if (width > 576) {
 
