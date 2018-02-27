@@ -42,32 +42,47 @@ function Output() {
             
             }
 
-            for (var i = 0; i < questionArray.length - 1; i += 3) {
-
-                var tr = document.createElement("tr");
-                var title = document.createElement("td");
-                var score = document.createElement("td");
-                var link = document.createElement("a");
-                var titleString = document.createTextNode(questionArray[i]);
-                var scoreString = document.createTextNode(questionArray[i + 2]);
-
-                link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
-                link.appendChild(titleString);
-                link.setAttribute("style", "text-decoration: none");
-                link.setAttribute("style", "color: #0078D7");
-                title.appendChild(link);
-                score.appendChild(scoreString);
-                tr.appendChild(title);
-                tr.appendChild(score);
-                table.appendChild(tr);
-
-            }
+            createElements(questionArray, table);
 
         } else {
 
             console.log("Error: There was a problem with the request");
 
         }
+
+    }
+
+}
+
+function createElements(questionArray, table) {
+
+    for (var i = 0; i < questionArray.length - 1; i += 3) {
+
+        var tr = document.createElement("tr");
+        var title = document.createElement("td");
+        var score = document.createElement("td");
+        var link = document.createElement("a");
+        var titleString = document.createTextNode(questionArray[i]);
+        var scoreString = document.createTextNode(questionArray[i + 2]);
+
+        link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
+        link.appendChild(titleString);
+        link.setAttribute("style", "text-decoration: none");
+        link.setAttribute("style", "color: #0078D7");
+        title.appendChild(link);
+        score.appendChild(scoreString);
+        appendChildren(tr, title, score)
+        table.appendChild(tr);
+
+    }
+
+}
+
+function appendChildren(parent, ...children) {
+
+    for (let i = 0; i < children.length; i++) {
+
+        parent.appendChild(children[i]);
 
     }
 
