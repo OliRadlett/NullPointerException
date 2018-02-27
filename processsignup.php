@@ -28,7 +28,8 @@ if ($result) {
 
             if (strpos($emailaddress, "@")) {
 
-                CreateAccount($connection, $username, $password_hash, $firstname, $lastname, $emailaddress);
+                $paramsArray = array($user, $password_hash, $firstname, $lastname, $emailaddress);
+                CreateAccount($connection, $paramsArray);
 
             } else {
 
@@ -54,9 +55,13 @@ if ($result) {
 
 }
 
-// Ugh ugh ugh ugh
-// Only doing this to get a higher score on BetterCodeHub
-function CreateAccount($connection, $username, $password_hash, $firstname, $lastname, $emailaddress) {
+function CreateAccount($connection, $paramsArray) {
+
+    $username = $paramsArray[0];
+    $password_hash = $paramsArray[1];
+    $firstname = $paramsArray[2];
+    $lastname = $paramsArray[3];
+    $emailaddress = $paramsArray[4];
 
     $query = "SELECT `id` FROM `users` WHERE `username` = '$username'";
     $result = mysqli_query($connection, $query);
@@ -65,12 +70,6 @@ function CreateAccount($connection, $username, $password_hash, $firstname, $last
     if (!$num_rows > 0) {
                 
         $query = "INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `email_address`) VALUES ('$username', '$password_hash', '$firstname', '$lastname', '$emailaddress');";
-                                    
-        if (!mysqli_query($connection, $query)) {
-                                
-            echo mysqli_error($connection);
-                                
-        }
 
         $query = "SELECT `id` FROM `users` WHERE `username` = '$username'";
         $id = mysqli_query($connection, $query);
