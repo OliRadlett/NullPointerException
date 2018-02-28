@@ -14,12 +14,10 @@ switch ($type) {
 		break;
 }
 $result = mysqli_query($connection, $query);
-if ($result) {
-    if ($type !== "hot") {
-        notHot($result);
-    } else if ($type == "hot") {
-        hot($result);
-    }
+if ($type !== "hot") {
+    notHot($result);
+} else if ($type == "hot") {
+    hot($result);
 }
 
 function hot($result) {
