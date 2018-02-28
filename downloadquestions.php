@@ -2,12 +2,16 @@
 include "connect.php";
 $connection = connect();
 $type = $_GET["type"];
-if ($type == "new"){
-    $query = "SELECT * FROM `questions` ORDER BY `id` DESC";
-} else if ($type == "top"){
-    $query = "SELECT * FROM `questions` ORDER BY `votes` DESC";
-} else if ($type == "hot"){
-    $query = "SELECT * FROM `questions`";
+switch ($type) {
+	case 'new':
+		$query = "SELECT * FROM `questions` ORDER BY `id` DESC";
+		break;
+	case 'top':
+		$query = "SELECT * FROM `questions` ORDER BY `votes` DESC";
+		break;
+	case 'new':
+		$query = "SELECT * FROM `questions`";
+		break;
 }
 $result = mysqli_query($connection, $query);
 if ($result) {
