@@ -39,4 +39,31 @@ function Upvoted($id, $qID, $connection) {
 
 }
 
+function ShowVotedArrows($qID, $qVotes, $connection) {
+
+    if (Upvoted($_SESSION["id"], $qID, $connection)) {
+
+        echo "<img id = 'numVotes' src = 'img/up_green.png' />";
+        echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
+        echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
+
+    } else {
+
+        echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
+        echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
+        echo "<img id = 'numVotes' src = 'img/down_red.png' />";
+                                
+    }
+
+}
+
+function ShowGreyArrows($qID, $qVotes, $connection) {
+
+    echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
+    echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
+    echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
+
+}
+
+
 ?>

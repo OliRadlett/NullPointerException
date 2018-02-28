@@ -11,7 +11,8 @@ include "questionFuncs.php" ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php include ("header.html"); ?>
+    <?php include ("header.html");
+    $connection = connect()?>
     <br/>
     <br/>
     <br/>
@@ -27,17 +28,13 @@ include "questionFuncs.php" ?>
         $qTime;
         $qAuthor;
 
-        if ($result) {
-                
-            while($row = mysqli_fetch_assoc($result)) {
+        while($row = mysqli_fetch_assoc($result)) {
                     
-                $qTitle =  $row["title"];
-                $qContent =  $row["question"];
-                $qVotes =  $row["votes"];
-                $qTime =  $row["time"];
-                $qAuthor =  $row["author"];
-
-            }
+            $qTitle =  $row["title"];
+            $qContent =  $row["question"];
+            $qVotes =  $row["votes"];
+            $qTime =  $row["time"];
+            $qAuthor =  $row["author"];
 
         }
 
@@ -57,42 +54,22 @@ include "questionFuncs.php" ?>
             </div>
             <div class = "col-lg-1">
                 <?php
-        
+
                     if (isset($_SESSION["username"])) {
 
                         if (UsrVoted($_SESSION["id"], $qID, $connection)) {
 
-                            if (Upvoted($_SESSION["id"], $qID, $connection)) {
-
-                                echo "<img id = 'numVotes' src = 'img/up_green.png' />";
-                                echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-                                echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
-
-                            } else {
-
-                                echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
-                                echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-                                echo "<img id = 'numVotes' src = 'img/down_red.png' />";
-                                
-                            }
+                            ShowVotedArrows($qID, $qVotes, $connection);
 
                         } else {
 
-                            if (UsrVoted($_SESSION["id"], $qID, $connection)) {
-
-                                echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
-                                echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-                                echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
-            
-                            }
+                            ShowGreyArrows($qID, $qVotes, $connection);
 
                         }
 
                     } else {
 
-                        echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
-                        echo "<h4> id = 'numVotes'>" . $qVotes . "</h4>";
-                        echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
+                        ShowGreyArrows($qID, $qVotes, $connection);
 
                     }
 
