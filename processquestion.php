@@ -21,12 +21,7 @@ if (mysqli_num_rows($result) !== 1) {
     if (!empty($title) && !empty($question)) {
 
         $query = "INSERT INTO `questions` (`title`, `question`, `votes`, `time`) VALUES ('$title', '$question', '1', '$time')";
-
-        if (!mysqli_query($connection, $query)) {
-                                
-            echo mysqli_error($connection);
-                
-        }
+        mysqli_query($connection, $query);
 
         header("Location: nullpointerexception.ml/qa.php");
 

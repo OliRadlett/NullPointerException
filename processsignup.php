@@ -70,6 +70,7 @@ function CreateAccount($connection, $paramsArray) {
     if (!$num_rows > 0) {
                 
         $query = "INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `email_address`) VALUES ('$username', '$password_hash', '$firstname', '$lastname', '$emailaddress');";
+        mysqli_query($connection, $query);
 
         $query = "SELECT `id` FROM `users` WHERE `username` = '$username'";
         $id = mysqli_query($connection, $query);
