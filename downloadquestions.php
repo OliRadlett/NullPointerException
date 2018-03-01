@@ -3,11 +3,11 @@ include "connect.php";
 $connection = connect();
 $type = $_GET["type"];
 if ($type == "new") {
-    $query = "SELECT * FROM `questions` ORDER BY `id` DESC";
+    $query = "SELECT * FROM `questions` ORDER BY `id` DESC LIMIT 10";
 } else if ($type == "top"){
-    $query = "SELECT * FROM `questions` ORDER BY `votes` DESC";
+    $query = "SELECT * FROM `questions` ORDER BY `votes` DESC LIMIT 10";
 } else if ($type == "hot"){
-    $query = "SELECT * FROM `questions`";
+    $query = "SELECT * FROM `questions` LIMIT 10";
 }
 $result = mysqli_query($connection, $query);
 if ($type !== "hot") {
