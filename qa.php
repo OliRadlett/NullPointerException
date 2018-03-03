@@ -23,23 +23,33 @@ include "connect.php"; ?>
         </div>
         <br/>
         <div class = "row">
-            <div class="form-group">
-                <label>Filter questions:</label>
-                <select id = "select" class="form-control" onchange = "Download()">
-                    <option>Hot</option>
-                    <option>Top</option>
-                    <option>New</option>
-                </select>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label>Filter questions:</label>
+                    <select id = "select" class="form-control" onchange = "Download()">
+                        <option>Hot</option>
+                        <option>Top</option>
+                        <option>New</option>
+                    </select>
+                </div>
             </div>
-            <div class = "table-responsive">
-                <table class = "table table-bordered table">
-                    <thead>
-                        <th><u>Title</u></th>
-                        <th><u>Score</u></th>
-                    </thead>
-                    <tbody id = "questionsTable">
-                    </tbody>
-                </table>
+            <div class = "col-sm-3">
+                <br/>
+                <button id = "BIGBUTTon" class = "text-right btn btn-primary" onclick = "window.location.href = 'ask.php';"><h4>Ask question!</h4></button>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-sm-12">
+                <div class = "table-responsive">
+                    <table class = "table table-bordered table">
+                        <thead>
+                            <th><u>Title</u></th>
+                            <th><u>Score</u></th>
+                        </thead>
+                        <tbody id = "questionsTable">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

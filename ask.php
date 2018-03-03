@@ -1,53 +1,50 @@
-<!DOCTYPE html>
 <?php session_start();
 include "connect.php"; ?>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/index.css" />
+    <script type="text/javascript" src = "scripts/logo-fix.js"></script>
     <title>NullPointerException</title>
-    <link href="stylesheets/ask.css" rel="stylesheet" />
-    <?php $connection = connect() ?>
 </head>
 <body>
-    <div id="header">
-        <img src="img/logo.png" />
-        <div id="header_buttons">
-            <h3 class="header_button"><a class = "header_button_link" href = "http://www.nullpointerexception.ml/">Home</a></h3>
-            <?php
-            if (isset($_SESSION["username"])) {
-
-                echo '<h3 class = "header_button"><a class = "header_button_link" href="account.php">My Account</a></h3>';
-
-            } else {
-
-                echo '<h3 class = "header_button"><a class = "header_button_link" href="signup.php">Sign Up/Login</a></h3>';
-
-            }
-            ?>
-            <h3 class="header_button"><a class = "header_button_link" href = "http://www.nullpointerexception.ml/qa.php">Q&A</a></h3>
-            <h3 class="header_button">Careers</h3>
-            <h3 class="header_button">Tutorial zone</h3>
-            <h3 class="header_button">Community</h3>
-        </div>
-    </div>
-    <div id = "profile">
     <?php
-    if (isset($_SESSION["username"])) {
+    	
+        $connection = connect();
+    	include ("header.html");
 
-        echo "<p id = 'profile-username'>" . $_SESSION["username"] . "</p><a href = 'http://www.nullpointerexception.ml/logout.php'><img id = 'profile-logout' src = 'img/logout.png' /></a>";
+        if (!isset($_SESSION["username"])) {
 
-    } else {
+            session_write_close();
+            header("Location: /error.php?error=notloggedin");
 
-        echo "<p id = 'profile-username'><a class = 'header_button_link' href='signup.php'>Login</a></p>";
+        }
 
-    }
     ?>
-    </div>
-    <div id = "ask-form">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class = "container">
         <form method = "post" action = "/processquestion.php">
-            <h4>Title:</h4>
-            <input type = "text" name = "title" />
-            <h4>Question:</h4>
-            <textarea name = "question" id="question-box"></textarea>
-            <input type = "submit" value = "Ask question!"? />
+            <div class="form-group">
+                <label><u>Title:</u></label>
+                <input type = "text" class = "form-control" placeholder="Question title" />
+            </div>
+            <div class="form-group">
+                <label><u>Question:</u></label>
+                <textarea class="form-control" rows="8" placeholder = "Question body"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Ask question!</button>
         </form>
     </div>
-</body>
+
+    <!--Keep at end of document for page load times-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
