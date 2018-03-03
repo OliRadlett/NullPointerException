@@ -14,6 +14,7 @@ if ($_SESSION["username"] == "admin") {
 
 } else {
 
+	session_write_close();
     header("Location: http://www.nullpointerexception.ml/");
 
 }

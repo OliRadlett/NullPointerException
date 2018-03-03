@@ -78,6 +78,7 @@ function CreateAccount($connection, $paramsArray) {
         $_SESSION["username"] = $username;
         $_SESSION["id"] = $id;
 
+        session_write_close();
         header("Location: http://www.nullpointerexception.ml/");
 
     } else {

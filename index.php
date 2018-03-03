@@ -27,12 +27,8 @@ include "connect.php"; ?>
         $date = date("d/m/Y");
         $time = date("h:ia");
         $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
-         
-        if (!mysqli_query($connection, $query)) {
         
-            echo mysqli_error($connection);
-        
-        }
+        echo mysqli_error($connection);
 
     	include ("header.html");
     ?>

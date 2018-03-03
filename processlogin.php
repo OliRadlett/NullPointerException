@@ -17,6 +17,7 @@ while($row = mysqli_fetch_assoc($result)) {
 
         $_SESSION["username"] = $username;
         $_SESSION["id"] = $row["id"];
+        session_write_close();
         header("Location: http://www.nullpointerexception.ml/");
                 
     } else {
