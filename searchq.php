@@ -45,6 +45,10 @@ include "connect.php"; ?>
                             <th><u>Score</u></th>
                         </thead>
                         <tbody id = "questionsTable">
+                        	<tr>
+                        		<td>Search for questions above...</td>
+                        		<td></td>
+                        	</tr>
                         </tbody>
                     </table>
                 </div>

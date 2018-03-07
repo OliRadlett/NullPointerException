@@ -8,20 +8,30 @@ function Download() {
     var search = document.getElementById("search");
     var query = search.value;
 
-    httpRequest = new XMLHttpRequest();
-    url = "/downloadsearchq.php?q=" + query;
+    if (query !== "") {
 
-    if (!httpRequest) {
+        httpRequest = new XMLHttpRequest();
+        url = "/downloadsearchq.php?q=" + query;
 
-        console.log("Error: could not create XMLHttpRequest object");
-        return false;
+        if (!httpRequest) {
+
+            console.log("Error: could not create XMLHttpRequest object");
+            return false;
+
+        }
+
+        httpRequest.onreadystatechange = Output;
+
+        httpRequest.open("GET", url);
+        httpRequest.send();
+
+    } else {
+
+        var table = document.getElementById("questionsTable");
+        wipeTable(table);
+        createBlankResult(table, "Search for questions above...");
 
     }
-
-    httpRequest.onreadystatechange = Output;
-
-    httpRequest.open("GET", url);
-    httpRequest.send();
 
 }
 
@@ -33,16 +43,19 @@ function Output() {
             
             var request = httpRequest.response;
             var questionArray = request.split("<br/>");
-            
             var table = document.getElementById("questionsTable");
 
-            while (table.hasChildNodes()) {
-                
-                table.removeChild(table.lastChild);
-            
-            }
+            wipeTable(table);
 
-            createElements(questionArray, table);
+            if (questionArray.length < 3) {
+
+                createBlankResult(table, "No results matched your search...")
+
+            } else {
+
+                createElements(questionArray, table);
+
+            }
 
         } else {
 
@@ -50,6 +63,16 @@ function Output() {
 
         }
 
+    }
+
+}
+
+function wipeTable(table) {
+
+    while (table.hasChildNodes()) {
+                
+        table.removeChild(table.lastChild);
+           
     }
 
 }
@@ -78,14 +101,16 @@ function createElements(questionArray, table) {
 
 }
 
-function createNoResult(table) {
+function createBlankResult(table, msg) {
 
     var tr = document.createElement("tr");
-    var td = document.createElement("td");
-    var string = document.createTextNode("No results found...");
-    td.appendChild(string);
-    tr.appendChild(td);
-    table.appendChildren(tr);
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var string = document.createTextNode(msg);
+    td1.appendChild(string);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    table.appendChild(tr);
 
 }
 
