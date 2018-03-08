@@ -8,6 +8,7 @@ include "connect.php"; ?>
 
 $title = $_POST['title'];
 $question = $_POST["question"];
+$username = $_SESSION["username"];
 $time = time();
 
 $address = $_SESSION["IPADDR"];
@@ -20,7 +21,7 @@ if (mysqli_num_rows($result) !== 1) {
     
     if (!empty($title) && !empty($question)) {
 
-        $query = "INSERT INTO `questions` (`title`, `question`, `votes`, `time`) VALUES ('$title', '$question', '1', '$time')";
+        $query = "INSERT INTO `questions` (`title`, `question`, `votes`, `time`, `author`) VALUES ('$title', '$question', '1', '$time', '$username')";
         mysqli_query($connection, $query);
         session_write_close();
         header("Location: /qa.php");
