@@ -33,11 +33,11 @@ include "connect.php"; ?>
         <form method = "post" action = "/processquestion.php">
             <div class="form-group">
                 <label><u>Title:</u></label>
-                <input type = "text" class = "form-control" placeholder="Question title" />
+                <input type = "text" class = "form-control" placeholder="Question title" name = "title"/>
             </div>
             <div class="form-group">
                 <label><u>Question:</u></label>
-                <textarea class="form-control" rows="8" placeholder = "Question body"></textarea>
+                <textarea class="form-control" rows="8" placeholder = "Question body" name = "question"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Ask question!</button>
         </form>
