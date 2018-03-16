@@ -8,11 +8,11 @@ include "connect.php"; ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/index.css" />
     <script type="text/javascript" src = "scripts/logo-fix.js"></script>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/icon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/icon/favicon-16x16.png">
+	<link rel="manifest" href="/img/icon/site.webmanifest">
+	<link rel="mask-icon" href="/img/icon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#9f00a7">
 	<meta name="theme-color" content="#ffffff">
     <title>NullPointerException</title>
@@ -27,10 +27,10 @@ include "connect.php"; ?>
         $date = date("d/m/Y");
         $time = date("h:ia");
         $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
-        
+
         echo mysqli_error($connection);
 
-    	include ("header.html");
+    	  include ("header.html");
     ?>
     <br />
     <br />
@@ -42,7 +42,7 @@ include "connect.php"; ?>
           <div class="col-lg-4">
             <h2>Q&A</h2>
             <p>No matter your programming experience, there will always be times when mysterious bugs allude you, or strange syntax bamboozles you.</p>
-            <p>NullPointerException provides a platform for you to not only ask questions, but to use your own knowledge to answer others questions.</p> 
+            <p>NullPointerException provides a platform for you to not only ask questions, but to use your own knowledge to answer others questions.</p>
             <p><a class="btn btn-secondary" href="qa.php" role="button">Go to Q&A &raquo;</a></p>
           </div>
           <div class="col-lg-4">
