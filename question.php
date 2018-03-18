@@ -17,11 +17,11 @@ include "questionFuncs.php" ?>
     <br/>
     <br/>
     <?php
-            
+
         $qID = $_GET["id"];
         $query = "SELECT * FROM `questions` WHERE `id` = '$qID'";
         $result = mysqli_query($connection, $query);
-            
+
         $qTitle;
         $qContent;
         $qVotes;
@@ -29,7 +29,7 @@ include "questionFuncs.php" ?>
         $qAuthor;
 
         while($row = mysqli_fetch_assoc($result)) {
-                    
+
             $qTitle =  $row["title"];
             $qContent =  $row["question"];
             $qVotes =  $row["votes"];
@@ -64,7 +64,6 @@ include "questionFuncs.php" ?>
                         } else {
 
                             ShowGreyArrows($qID, $qVotes, $connection);
-
                         }
 
                     } else {
@@ -85,5 +84,16 @@ include "questionFuncs.php" ?>
         <div class = "row">
             <hr>
         </div>
+        <br />
+        <br />
+        <div class = "row">
+          <h4><b>Comments:</b></h4>
+        </div>
+        <br/>
+        <?php
+
+          GetComments($qID, $connection);
+
+         ?>
     </div>
 </body>

@@ -7,7 +7,7 @@ function UsrVoted($id, $qID, $connection) {
     $num_rows = mysqli_num_rows($result);
 
     if ($num_rows == 1) {
-        
+
         return true;
 
     } else {
@@ -52,7 +52,7 @@ function ShowVotedArrows($qID, $qVotes, $connection) {
         echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
         echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
         echo "<img id = 'numVotes' src = 'img/down_red.png' />";
-                                
+
     }
 
 }
@@ -65,5 +65,39 @@ function ShowGreyArrows($qID, $qVotes, $connection) {
 
 }
 
+function GetComments($qID, $connection) {
+
+  $query = "SELECT * FROM `comments` WHERE `qid` = '$qID' ORDER BY `votes` DESC";
+  $result = mysqli_query($connection, $query);
+
+  while($row = mysqli_fetch_assoc($result)) {
+
+    Comment($row, $connection);
+
+  }
+
+}
+
+function Comment($row, $connection) {
+
+  $author = $row["author"];
+  $comment = $row["comment"];
+  //etc
+
+  echo "<div class = 'row comment'>";
+  echo "<p>" . $comment . " - <i class = 'comment_username'>" . $author . "</i><i>" . ($author == $_SESSION["username"] ? " (edit comment)" : "") ."</i></p>";
+  echo "</div>";
+  //echo "<div class = 'row seperator'></div>";
+  echo "<br/>";
+
+}
+
+function getUserID($connection, $username) {
+
+  $query = "SELECT `id` FROM `users` WHERE `username` = '$username'";
+  $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
+  return $result["id"];
+
+}
 
 ?>
