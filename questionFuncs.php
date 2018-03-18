@@ -85,7 +85,7 @@ function Comment($row, $connection) {
   //etc
 
   echo "<div class = 'row comment'>";
-  echo "<p>" . $comment . " - <i class = 'comment_username'>" . $author . "</i><i>" . ($author == $_SESSION["username"] ? " (edit comment)" : "") ."</i></p>";
+  echo "<p>" . $comment . " - <i class = 'comment_username'>" . $author . "</i><i>" . (isset($_SESSION["username"]) ? ($author == $_SESSION["username"] ? " (edit comment)" : "") : "") ."</i></p>";
   echo "</div>";
   //echo "<div class = 'row seperator'></div>";
   echo "<br/>";
