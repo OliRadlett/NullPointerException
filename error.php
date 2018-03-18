@@ -1,12 +1,16 @@
 <?php
 
-$error = $_GET["error"];
+if (isset($_GET["error"])) {$error = $_GET["error"];} else {$error = "";}
 $msg;
 
 switch ($error) {
 	
 	case 'notloggedin':
 		$msg = "You are not logged in.";
+		break;
+
+	case 'noquestionid':
+		$msg = "No question ID was specified";
 		break;
 	
 	default:

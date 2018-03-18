@@ -18,15 +18,22 @@ include "questionFuncs.php" ?>
     <br/>
     <?php
 
-        $qID = $_GET["id"];
+        if (isset($_GET["id"])) {
+
+            $qID = $_GET["id"];
+
+        } else {
+
+            session_write_close();
+            header("Location: error.php?error=noquestionid");
+
+        }
+
         $query = "SELECT * FROM `questions` WHERE `id` = '$qID'";
         $result = mysqli_query($connection, $query);
 
-        $qTitle;
-        $qContent;
-        $qVotes;
-        $qTime;
-        $qAuthor;
+        // Declare multiple variables on the same line
+        $qTitle = $qContent = $qVotes = $qTime = $qAuthor = "";
 
         while($row = mysqli_fetch_assoc($result)) {
 
@@ -87,7 +94,12 @@ include "questionFuncs.php" ?>
         <br />
         <br />
         <div class = "row">
-          <h4><b>Comments:</b></h4>
+            <div class ="col-10">
+                <h4><b>Comments:</b></h4>
+            </div>
+            <div class ="col-2">
+                <button class = "btn btn-primary">Comment</button>
+            </div>
         </div>
         <br/>
         <?php
