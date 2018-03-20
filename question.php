@@ -8,6 +8,8 @@ include "questionFuncs.php" ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel = "stylesheet" href = "stylesheets/index.css">
+    <link rel = "stylesheet" href = "prism/prism.css">
+    <script type="text/javascript" src = "prism/prism.js"></script>
     <title>NullPointerException</title>
 </head>
 <body>
@@ -55,7 +57,34 @@ include "questionFuncs.php" ?>
         <br/>
         <div class = "row">
             <div class = "col-lg-10">
-                <p><?php echo $qContent; ?></p>
+                <?php
+
+                    $questionArray = explode("\n", $qContent);
+
+                    foreach ($questionArray as $line) {
+                        
+                        if (substr($line, 0, 3) == "```") {
+
+                            $line = trim($line);
+
+                            if (strlen($line) == 3) { //this condition is not met...
+
+                                echo "Found end of code block";
+
+                            } else {
+
+                                echo "Found start of code block <br/>";
+
+                                $language = substr($line, 3);
+                                echo "Language is " . $language . "<br/>";
+
+                            }
+
+                        }
+
+                    }
+
+                ?>
             </div>
             <div class = "col-lg-1">
             </div>
