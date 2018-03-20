@@ -98,7 +98,9 @@ include "questionFuncs.php" ?>
                 <h4><b>Comments:</b></h4>
             </div>
             <div class ="col-2">
-                <button class = "btn btn-primary">Comment</button>
+                <?php
+                    echo '<button class = "btn btn-primary" onclick = "window.location.href = `comment.php?id=' . $_GET["id"] . '`">Comment</button>';
+                ?>
             </div>
         </div>
         <br/>
