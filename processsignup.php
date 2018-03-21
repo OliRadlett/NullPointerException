@@ -14,7 +14,7 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $emailaddress = $_POST['emailaddress'];
 
-$address = $_SESSION["IPADDR"];
+$address = $_SESSION["IPADDR"]; //Not assigned got some reason
 
 $query = "SELECT `address` FROM `blocked_ipaddr` WHERE `address` = '$address'";
 
@@ -28,7 +28,7 @@ if ($result) {
 
             if (strpos($emailaddress, "@")) {
 
-                $paramsArray = array($user, $password_hash, $firstname, $lastname, $emailaddress);
+                $paramsArray = array($username, $password_hash, $firstname, $lastname, $emailaddress);
                 CreateAccount($connection, $paramsArray);
 
             } else {
