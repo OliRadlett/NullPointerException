@@ -60,23 +60,32 @@ include "questionFuncs.php" ?>
                 <?php
 
                     $questionArray = explode("\n", $qContent);
+                    $splitArray = SplitLines($questionArray);
 
-                    foreach ($questionArray as $line) {
-                        
-                        if (substr($line, 0, 3) == "```") {
+                    for ($i = 0; $i < sizeof($questionArray); $i++) {
 
-                            $line = trim($line);
+                        if (in_array($i, $splitArray[0])) {
 
-                            if (strlen($line) == 3) { //this condition is not met...
+                            echo $questionArray[$i] . "<br/>";
 
-                                echo "Found end of code block";
+                        } else if (in_array($i, $splitArray[1])) {
+
+                            $line = trim($questionArray[$i]);
+
+                            if ((strlen($line) > 3) && (substr($line, 0, 3) == "```")) {
+
+                                // Must be start of code block
+                                StartCodeBlock(substr($line, 3));
+
+                            } else if ((strlen($line) == 3) && (substr($line, 0, 3) == "```")) {
+
+                                // Must be end of code block
+                                EndCodeBlock();
 
                             } else {
 
-                                echo "Found start of code block <br/>";
-
-                                $language = substr($line, 3);
-                                echo "Language is " . $language . "<br/>";
+                                //var_dump($questionArray[$i]);
+                                echo htmlspecialchars(substr($questionArray[$i], 1));
 
                             }
 

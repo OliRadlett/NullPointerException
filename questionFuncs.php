@@ -102,4 +102,42 @@ function getUserID($connection, $username) {
 
 }
 
+function SplitLines($questionArray) {
+
+  $normalLines = array();
+  $codeblockLines = array();
+
+  for ($i = 0; $i < sizeof($questionArray); $i++) {
+
+    $line = $questionArray[$i];
+                        
+    if (substr($line, 0, 1) == "`") {
+
+      array_push($codeblockLines, $i);
+
+    } else {
+      
+      array_push($normalLines, $i);
+    }
+
+  }
+
+  return array($normalLines, $codeblockLines);
+
+}
+
+function StartCodeBlock($language) {
+
+  echo "<pre>";
+  echo "<code class = 'language-" . $language . "'>";
+
+}
+
+function EndCodeBlock() {
+
+  echo "</code>";
+  echo "</pre>";
+
+}
+
 ?>
