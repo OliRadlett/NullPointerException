@@ -7,19 +7,19 @@ include "connect.php"; ?>
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-    
+
 $query = "SELECT `id`, `password` FROM `users` WHERE `username` = '$username'";
 $result = mysqli_query($connection, $query);
-    
+
 while($row = mysqli_fetch_assoc($result)) {
-            
+
     if (password_verify($password, $row['password'])) {
 
         $_SESSION["username"] = $username;
         $_SESSION["id"] = $row["id"];
         session_write_close();
-        header("Location: http://www.nullpointerexception.ml/");
-                
+        header("Location: /index.php");
+
     } else {
 
         echo "Error - username/password combination does not exist";
