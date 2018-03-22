@@ -82,11 +82,13 @@ function Comment($row, $connection) {
 
   $author = $row["author"];
   $comment = $row["comment"];
+  $commentID = $row["id"];
+  $qid = $row["qid"];
   //etc
 
   echo "<div class = 'row comment'>";
   echo "<div class = 'col'>";
-  echo "<p>" . $comment . " - <i class = 'comment_username'>" . $author . "</i><i>" . (isset($_SESSION["username"]) ? ($author == $_SESSION["username"] ? " (edit comment)" : "") : "") ."</i></p>";
+  echo "<p>" . $comment . " - <i class = 'comment_username'>" . $author . "</i><i>" . (isset($_SESSION["username"]) ? ($author == $_SESSION["username"] ? " (<a href='editcomment.php?id=" . $commentID . "&qid=" . $qid . "'>edit comment</a>)" : "") : "") ."</i></p>";
   echo "</div>";
   echo "</div>";
   //echo "<div class = 'row seperator'></div>";
@@ -110,13 +112,13 @@ function SplitLines($questionArray) {
   for ($i = 0; $i < sizeof($questionArray); $i++) {
 
     $line = $questionArray[$i];
-                        
+
     if (substr($line, 0, 1) == "`") {
 
       array_push($codeblockLines, $i);
 
     } else {
-      
+
       array_push($normalLines, $i);
     }
 
@@ -137,6 +139,32 @@ function EndCodeBlock() {
 
   echo "</code>";
   echo "</pre>";
+
+}
+
+function isUsersComment($connection, $username, $id) {
+
+  $query = "SELECT `author` FROM `comments` WHERE `author` = '$username' AND `id` = '$id'";
+  $result = mysqli_query($connection, $query);
+
+  if (mysqli_num_rows($result) == 1) {
+
+    return true;
+
+  } else {
+
+    return false;
+
+  }
+
+}
+
+function GetComment($connection, $id) {
+
+  $query = "SELECT `comment` FROM `comments` WHERE `id` = '$id'";
+  $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
+
+  return $result["comment"];
 
 }
 
