@@ -65,6 +65,20 @@ include "connect.php"; ?>
                 </ul>
             </div>
         </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class = "col-lg-5">
+                <h3>Example programs:</h3>
+                <ul>
+                  <li><a href = "sampleprograms/python3/helloworld.php">Simple Hello world</a></li>
+                  <li><a href = "sampleprograms/python3/variables.php">Variables</a></li>
+                  <li><a href = "sampleprograms/python3/ifelse.php">If/else/else if</a></li>
+                  <li><a href = "sampleprograms/python3/functions.php">Functions</a></li>
+                  <li><a href = "sampleprograms/python3/classes.php">Classes</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 </html>
