@@ -15,23 +15,41 @@ include "questionFuncs.php" ?>
 <body>
     <?php include ("header.html");
     $connection = connect()?>
+    <script type="text/javascript" src = "scripts/getUserVotes.js"></script>
     <br/>
     <br/>
     <br/>
     <?php
 
-        if (isset($_GET["id"])) {
+        function SetCookies() {
 
-            $qID = $_GET["id"];
+            if (isset($_GET["id"])) {
 
-        } else {
+                setcookie("current_qid", $_GET["id"]);
 
-            session_write_close();
-            header("Location: error.php?error=noquestionid");
+            } else {
+
+                session_write_close();
+                header("Location: error.php?error=noquestionid");
+
+            }
+
+            if (isset($_SESSION["username"])) {
+
+                setcookie("logged_in", "true");
+                setcookie("current_username", $_SESSION["username"]);
+
+            } else {
+
+                setcookie("logged_in", "false");
+
+            }
 
         }
 
-        $query = "SELECT * FROM `questions` WHERE `id` = '$qID'";
+        SetCookies();
+
+        $query = "SELECT * FROM `questions` WHERE `id` = '" . $_GET["id"] . "'";
         $result = mysqli_query($connection, $query);
 
         // Declare multiple variables on the same line
@@ -102,18 +120,18 @@ include "questionFuncs.php" ?>
 
                     if (isset($_SESSION["username"])) {
 
-                        if (UsrVoted($_SESSION["id"], $qID, $connection)) {
+                        if (UsrVoted($_SESSION["id"], $_GET["id"], $connection)) {
 
-                            ShowVotedArrows($qID, $qVotes, $connection);
+                            ShowVotedArrows($_GET["id"], $qVotes, $connection);
 
                         } else {
 
-                            ShowGreyArrows($qID, $qVotes, $connection);
+                            ShowGreyArrows($_GET["id"], $qVotes, $connection);
                         }
 
                     } else {
 
-                        ShowGreyArrows($qID, $qVotes, $connection);
+                        ShowGreyArrows($_GET["id"], $qVotes, $connection);
 
                     }
 
@@ -144,7 +162,7 @@ include "questionFuncs.php" ?>
         <br/>
         <?php
 
-          GetComments($qID, $connection);
+          GetComments($_GET["id"], $connection);
 
          ?>
     </div>
