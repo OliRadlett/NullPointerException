@@ -43,15 +43,15 @@ function ShowVotedArrows($qID, $qVotes, $connection) {
 
     if (Upvoted($_SESSION["id"], $qID, $connection)) {
 
-        echo "<img id = 'numVotes' src = 'img/up_green.png' />";
+        echo "<a href = '#' onclick='Up(`green`);return false'><img id = 'numVotes' src = 'img/up_green.png' /></a>";
         echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-        echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
+        echo "<a href = '#' onclick='Down(`green`);return false'><img id = 'numVotes' src = 'img/down_grey.png' /></a>";
 
     } else {
 
-        echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
+        echo "<a href = '#' onclick='Up(`red`);return false'><img id = 'numVotes' src = 'img/up_grey.png' /></a>";
         echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-        echo "<img id = 'numVotes' src = 'img/down_red.png' />";
+        echo "<a href = '#' onclick='Down(`red`);return false'><img id = 'numVotes' src = 'img/down_red.png' />";
 
     }
 
@@ -59,9 +59,9 @@ function ShowVotedArrows($qID, $qVotes, $connection) {
 
 function ShowGreyArrows($qID, $qVotes, $connection) {
 
-    echo "<img id = 'numVotes' src = 'img/up_grey.png' />";
+    echo "<a href = '#' onclick='Up(`grey`);return false'><img id = 'numVotes' src = 'img/up_grey.png' /></a>";
     echo "<h4 id = 'numVotes'>" . $qVotes . "</h4>";
-    echo "<img id = 'numVotes' src = 'img/down_grey.png' />";
+    echo "<a href = '#' onclick='Down(`grey`);return false'><img id = 'numVotes' src = 'img/down_grey.png' /></a>";
 
 }
 
