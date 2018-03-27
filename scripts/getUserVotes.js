@@ -1,7 +1,7 @@
 window.onload = Download;
 
 var qID = GetCookie("current_qid");
-window.logged_in = GetCookie("window.logged_in");
+window.logged_in = GetCookie("logged_in");
 
 if (window.logged_in == "true") {
 
@@ -13,7 +13,7 @@ function Download() {
 
   if (window.logged_in == "true") {
 
-      url = "/downloadquestionvotes.php?qid=" + qID + "&username=" + username;
+      url = "/downloadquestionvotes.php?qid=" + qID + "&username=" + username ;
 
       Request(url, "GET", DrawArrow)
 
@@ -26,16 +26,46 @@ function Download() {
 
 }
 
+function Arrows(type) {
+
+    console.log(type);
+
+    switch (type) {
+
+        case "up":
+
+            document.getElementById("upArrow").src = "img/up_green.png";
+            document.getElementById("downArrow").src = "img/down_grey.png";
+            break;
+
+        case "down":
+
+            document.getElementById("upArrow").src = "img/up_grey.png";
+            document.getElementById("downArrow").src = "img/down_red.png";
+            break;
+
+        default:
+
+            // (no vote)
+            document.getElementById("upArrow").src = "img/up_grey.png";
+            document.getElementById("downArrow").src = "img/down_grey.png";
+            break;
+
+    }
+
+    console.log("Finished request");
+
+}
+
 function DrawArrow() {
 
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
         if (httpRequest.status === 200) {
 
-            var request = httpRequest.response;
+            var req = httpRequest.response;
 
-            // Just testing returned values, add functionality later
-            alert(request);
+            Arrows(req);
 
         }
 
@@ -99,14 +129,22 @@ function Down(lastState) {
 
 function AddVote(type) {
 
-    if (window.logged_in) {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-        var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=add" + type + "vote";
-        Request(url, "GET", 0);
+        if (httpRequest.status === 200) {
 
-    } else {
+            if (window.logged_in) {
 
-        alert("Stop. Stop it pls.");
+                var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=add" + type + "vote";
+                Request(url, "GET", 0);
+
+            } else {
+
+                alert("Stop. Stop it pls.");
+
+            }
+
+        }
 
     }
 
@@ -114,16 +152,28 @@ function AddVote(type) {
 
 function RemoveVote() {
 
-    if (window.logged_in) {
+  if (httpRequest.readyState === XMLHttpRequest.DONE) {
 
-        var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote";
-        Request(url, "GET", 0);
+      if (httpRequest.status === 200) {
+
+        if (window.logged_in) {
+
+            var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote";
+            Request(url, "GET", 0);
+
+        }
+
+      }
 
     }
 
 }
 
 function Request(url, method, callback) {
+
+    url += "&_=" + Math.random();
+
+    console.log("Starting request");
 
     httpRequest = new XMLHttpRequest();
 
