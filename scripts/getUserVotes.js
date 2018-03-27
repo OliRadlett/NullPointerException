@@ -1,5 +1,3 @@
-window.onload = Download;
-
 var qID = GetCookie("current_qid");
 window.logged_in = GetCookie("logged_in");
 
@@ -9,185 +7,160 @@ if (window.logged_in == "true") {
 
 }
 
+var $UpArrow = $("#UpArrow");
+var $DownArrow = $("#DownArrow");
+
+$(function(){
+
+  Download();
+
+});
+
 function Download() {
 
-  if (window.logged_in == "true") {
+    $.get("downloadquestionvotes.php?qid=" + qID + "&username=" + username + "&_=" + Math.random(), function(data) {
 
-      url = "/downloadquestionvotes.php?qid=" + qID + "&username=" + username ;
+      window.current = data;
 
-      Request(url, "GET", DrawArrow)
-
-    } else {
-
-      // Not logged in so draw grey arrows and don't allow voting
-      alert("Ugh, don't do that, you ain't logged in");
-
-    }
-
-}
-
-function Arrows(type) {
-
-    console.log(type);
-
-    switch (type) {
+      switch (data) {
 
         case "up":
-
-            document.getElementById("upArrow").src = "img/up_green.png";
-            document.getElementById("downArrow").src = "img/down_grey.png";
-            break;
+          $("#UpArrow").attr("src", "img/up_green.png");
+          $("#DownArrow").attr("src", "img/down_grey.png");
+          break;
 
         case "down":
-
-            document.getElementById("upArrow").src = "img/up_grey.png";
-            document.getElementById("downArrow").src = "img/down_red.png";
-            break;
+          $("#UpArrow").attr("src", "img/up_grey.png");
+          $("#DownArrow").attr("src", "img/down_red.png");
+          break;
 
         default:
+          $("#UpArrow").attr("src", "img/up_grey.png");
+          $("#DownArrow").attr("src", "img/down_grey.png");
+          break;
 
-            // (no vote)
-            document.getElementById("upArrow").src = "img/up_grey.png";
-            document.getElementById("downArrow").src = "img/down_grey.png";
-            break;
+      }
 
-    }
-
-    console.log("Finished request");
+    });
 
 }
 
-function DrawArrow() {
+function Vote(type) {
 
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+  switch (type) {
 
-        if (httpRequest.status === 200) {
+    case "up":
+      Up();
+      break;
 
-            var req = httpRequest.response;
+    case "down":
+      Down();
+      break;
 
-            Arrows(req);
+    default:
+      break;
 
-        }
-
-    }
-
-}
-
-function Up(lastState) {
-
-    switch (lastState) {
-
-        case "green":
-
-            RemoveVote();
-            Download();
-            break;
-
-        case "red":
-
-            RemoveVote();
-            AddVote("up");
-            Download();
-            break;
-
-        case "grey":
-
-            AddVote("up");
-            Download();
-            break;
-
-    }
-
-}
-
-function Down(lastState) {
-
-    switch (lastState) {
-
-        case "red":
-
-            RemoveVote();
-            Download();
-            break;
-
-        case "green":
-
-            RemoveVote();
-            AddVote("down");
-            Download();
-            break;
-
-        case "grey":
-
-            AddVote("down");
-            Download();
-            break;
-
-    }
-
-}
-
-function AddVote(type) {
-
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-
-        if (httpRequest.status === 200) {
-
-            if (window.logged_in) {
-
-                var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=add" + type + "vote";
-                Request(url, "GET", 0);
-
-            } else {
-
-                alert("Stop. Stop it pls.");
-
-            }
-
-        }
-
-    }
+  }
 
 }
 
 function RemoveVote() {
 
-  if (httpRequest.readyState === XMLHttpRequest.DONE) {
+  $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote&_=" + Math.random(), function(data) {
 
-      if (httpRequest.status === 200) {
+    Download();
 
-        if (window.logged_in) {
-
-            var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote";
-            Request(url, "GET", 0);
-
-        }
-
-      }
-
-    }
+  });
 
 }
 
-function Request(url, method, callback) {
+function AddUpVote() {
 
-    url += "&_=" + Math.random();
+  $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=addupvote&_=" + Math.random(), function(data) {
 
-    console.log("Starting request");
+    Download();
 
-    httpRequest = new XMLHttpRequest();
+  });
 
-    if (!httpRequest) {
+}
 
-        console.log("Error: could not create XMLHttpRequest object");
-        return false;
+function AddDownVote() {
 
-    }
+  $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=adddownvote&_=" + Math.random(), function(data) {
 
-    httpRequest.onreadystatechange = callback;
+    Download();
 
-    httpRequest.open(method, url);
-    httpRequest.send();
+  });
+
+}
+
+function DownToUp() {
+
+  $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote&_=" + Math.random(), function(data) {
+
+    //Should probably change from delete and re-add to edit
+    $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=addupvote&_=" + Math.random(), function(data) {
+
+      Download();
+
+    });
+
+  });
+
+}
+
+function UpToDown() {
+
+  $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote&_=" + Math.random(), function(data) {
+
+    //Should probably change from delete and re-add to edit
+    $.get("modifyvote.php?qid=" + qID + "&username=" + username + "&func=adddownvote&_=" + Math.random(), function(data) {
+
+      Download();
+
+    });
+
+  });
+
+}
+
+function Up() {
+
+  switch (window.current) {
+
+    case "up":
+      RemoveVote();
+      break;
+
+    case "down":
+      DownToUp();
+      break;
+
+    default:
+      AddUpVote();
+      break;
+
+  }
+
+}
+
+function Down() {
+
+  switch (window.current) {
+
+    case "down":
+      RemoveVote();
+      break;
+
+    case "up":
+      UpToDown();
+      break;
+
+    default:
+      AddDownVote();
+      break;
+
+  }
 
 }
 

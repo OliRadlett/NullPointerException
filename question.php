@@ -10,6 +10,7 @@ include "questionFuncs.php" ?>
     <link rel = "stylesheet" href = "stylesheets/index.css">
     <link rel = "stylesheet" href = "prism/prism.css">
     <script type="text/javascript" src = "prism/prism.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>NullPointerException</title>
 </head>
 <body>
@@ -116,26 +117,9 @@ include "questionFuncs.php" ?>
             <div class = "col-lg-1">
             </div>
             <div class = "col-lg-1">
-                <?php
-
-                    if (isset($_SESSION["username"])) {
-
-                        if (UsrVoted($_SESSION["id"], $_GET["id"], $connection)) {
-
-                            ShowVotedArrows($_GET["id"], $qVotes, $connection);
-
-                        } else {
-
-                            ShowGreyArrows($_GET["id"], $qVotes, $connection);
-                        }
-
-                    } else {
-
-                        ShowGreyArrows($_GET["id"], $qVotes, $connection);
-
-                    }
-
-                ?>
+              <a href = "#" onclick = "Vote(`up`)"><img src = "img/up_grey.png" id = "UpArrow"/></a>
+              <h4><?php echo $qVotes ?></h4>
+              <a href = "#" onclick = "Vote(`down`)"><img src = "img/down_grey.png" id = "DownArrow"/></a>
             </div>
         </div>
         <div class = "row">
