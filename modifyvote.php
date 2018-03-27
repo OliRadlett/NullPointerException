@@ -16,13 +16,35 @@ switch ($func) {
     case 'addupvote':
         AddUpVote($connection, $qID, $uID);
         break;
+    case 'adddownvote':
+        AddDownVote($connection, $qID, $uID);
+        break;
     default:
         break;
 }
+function AlreadyVoted($connection, $qID, $uID) {
+    $query = "SELECT `id` FROM `votes` WHERE (`qID` = '$qID' AND `uID` = '$uID')";
+    $result = mysqli_query($connection, $query);
+    if (isset($result) && mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
 function AddUpVote($connection, $qID, $uID) {
-    $query = "INSERT INTO `votes` (`qID`, `uID`, `type`) VALUES ('$qID', '$uID', 'u')";
-    mysqli_query($connection, $query);
-    mysqli_close($connection);
+    if (!AlreadyVoted($connection, $qID, $uID)) {
+        $query = "INSERT INTO `votes` (`qID`, `uID`, `type`) VALUES ('$qID', '$uID', 'u')";
+        mysqli_query($connection, $query);
+        mysqli_close($connection);
+    }
+}
+function AddDownVote($connection, $qID, $uID) {
+    if (!AlreadyVoted($connection, $qID, $uID)) {
+        $query = "INSERT INTO `votes` (`qID`, `uID`, `type`) VALUES ('$qID', '$uID', 'd')";
+        mysqli_query($connection, $query);
+        mysqli_close($connection);
+    }
 }
 function RemoveVote($connection, $qID, $uID) {
     $query = "DELETE FROM `votes` WHERE (`votes`.`qID` = '$qID' AND `votes`.`uID` = '$uID')";

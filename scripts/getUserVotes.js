@@ -1,9 +1,9 @@
 window.onload = Download;
 
 var qID = GetCookie("current_qid");
-var logged_in = GetCookie("logged_in");
+window.logged_in = GetCookie("window.logged_in");
 
-if (logged_in == "true") {
+if (window.logged_in == "true") {
 
     var username = GetCookie("current_username");
 
@@ -11,14 +11,17 @@ if (logged_in == "true") {
 
 function Download() {
 
-  if (logged_in == "true") {
+  if (window.logged_in == "true") {
 
       url = "/downloadquestionvotes.php?qid=" + qID + "&username=" + username;
 
       Request(url, "GET", DrawArrow)
 
     } else {
+
       // Not logged in so draw grey arrows and don't allow voting
+      alert("Ugh, don't do that, you ain't logged in");
+
     }
 
 }
@@ -46,18 +49,21 @@ function Up(lastState) {
 
         case "green":
 
-            RemoveVote()
+            RemoveVote();
+            Download();
             break;
 
         case "red":
 
             RemoveVote();
             AddVote("up");
+            Download();
             break;
 
         case "grey":
 
             AddVote("up");
+            Download();
             break;
 
     }
@@ -70,18 +76,21 @@ function Down(lastState) {
 
         case "red":
 
-            RemoveVote()
+            RemoveVote();
+            Download();
             break;
 
         case "green":
 
             RemoveVote();
             AddVote("down");
+            Download();
             break;
 
         case "grey":
 
             AddVote("down");
+            Download();
             break;
 
     }
@@ -90,15 +99,27 @@ function Down(lastState) {
 
 function AddVote(type) {
 
-    var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=add" + type + "vote";
-    Request(url, "GET", 0);
+    if (window.logged_in) {
+
+        var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=add" + type + "vote";
+        Request(url, "GET", 0);
+
+    } else {
+
+        alert("Stop. Stop it pls.");
+
+    }
 
 }
 
 function RemoveVote() {
 
-    var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote";
-    Request(url, "GET", 0);
+    if (window.logged_in) {
+
+        var url = "/modifyvote.php?qid=" + qID + "&username=" + username + "&func=removevote";
+        Request(url, "GET", 0);
+
+    }
 
 }
 
