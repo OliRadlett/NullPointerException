@@ -2,7 +2,7 @@
 
 function connect() {
 
-	$config = parse_ini_file('../../config.ini'); 
+	$config = parse_ini_file('../private/config.ini'); 
     
     $db_server = $config["server"];
     $db_database = $config["database"];
