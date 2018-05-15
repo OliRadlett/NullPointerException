@@ -30,7 +30,7 @@ include "connect.php"; ?>
 
         echo mysqli_error($connection);
 
-    	  include ("header.html");
+    	include ("header.html");
     ?>
     <br />
     <br />
