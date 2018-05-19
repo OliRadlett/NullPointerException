@@ -79,7 +79,7 @@ function CreateAccount($connection, $paramsArray) {
         $_SESSION["id"] = $id;
 
         session_write_close();
-        header("Location: http://www.nullpointerexception.ml/");
+        redirect("http://nullpointerexception.ml");
 
     } else {
 
@@ -89,6 +89,24 @@ function CreateAccount($connection, $paramsArray) {
 
     }
 
+}
+
+function redirect($url)
+{
+    if (!headers_sent())
+    {    
+        header('Location: '.$url);
+        exit;
+        }
+    else
+        {  
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+        echo '</noscript>'; exit;
+    }
 }
 
 ?>

@@ -7,6 +7,8 @@ if ($type == "new") {
 } else if ($type == "top"){
     $query = "SELECT * FROM `questions` ORDER BY `votes` DESC LIMIT 10";
 } else if ($type == "hot"){
+    // Hmmmm, does limiting the selection to the first 10 only process the question 1-10 and ignore anything asked after the first 10?
+    // Maybe it should be limited to 10 after the processing has been completed.
     $query = "SELECT * FROM `questions` LIMIT 10";
 }
 $result = mysqli_query($connection, $query);
