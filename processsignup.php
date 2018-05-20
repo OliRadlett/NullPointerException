@@ -14,7 +14,7 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $emailaddress = $_POST['emailaddress'];
 
-$address = $_SESSION["IPADDR"]; //Not assigned got some reason
+$address = $_SESSION["IPADDR"]; //Not assigned for some reason
 
 $query = "SELECT `address` FROM `blocked_ipaddr` WHERE `address` = '$address'";
 
