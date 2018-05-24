@@ -244,34 +244,28 @@ function redirect($url) {
 
 }
 
-class Error {
+function Error($message, $back_button) {
 
-	/**
- 	* Class to display error messages to the user, as well an optional back button
- 	* 
- 	* @author Oli Radlett <o.radlett@gmail.com>
- 	* @since Commit 83 - 23/05/18
- 	* 
- 	*/
+    /**
+    * Display an error message to the client, as well as an optional back button
+    * 
+    * @param String $message - Error message to be outputted to the client
+    * @param Boolean $back_button - Boolean parameter specifying whether to display a back button
+    * 
+    * @author Oli Radlett <o.radlett@gmail.com>
+    * 
+    */
 
-	public $message;
-	public $back_button;
+    echo $message;
+    // Line break
+    echo "<br/>";
 
-	function __construct($message, $back_button) {
+    if ($back_button) {
 
-		$this->message = $message;
-		$this->back_button = $back_button;
+        // If the back_button parameter is true, display a back button
+        echo "<button onclick='window.location.href = `http://www.nullpointerexception.ml/signup.php`';>Back</button>";
 
-		echo $this->message;
-		echo "<br/>";
-
-		if ($this->back_button) {
-
-			echo "<button onclick='window.location.href = `http://www.nullpointerexception.ml/signup.php`';>Back</button>";
-
-		}
-
-	}
+    }
 
 }
 
