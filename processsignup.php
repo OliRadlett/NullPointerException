@@ -29,25 +29,25 @@ if (!blocked_ip($connection, $_SESSION["IPADDR"])) {
 
 			} else {
 
-				new Error("Error - That username is already taken", true);
+				Error("Error - That username is already taken", true);
 
 			}
 
 		} else {
 
-			new Error("Error - Please enter a valid email", true);
+			Error("Error - Please enter a valid email", true);
 
 		}
 
 	} else {
 
-		new Error("Error - Please make sure all fields have been filled", true);
+		Error("Error - Please make sure all fields have been filled", true);
 
 	}
 
 } else {
 
-	new Error("You have been banned from creating accounts", false);
+    Error("You have been banned from creating accounts", false);
 
 }
 
