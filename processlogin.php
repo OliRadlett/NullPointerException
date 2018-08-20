@@ -1,34 +1,55 @@
-<?php session_start();
-include "connect.php"; ?>
-<head>
-</head>
-<body>
-<?php $connection = connect();
+<?php
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+session_start();
+include "connect.php";
+include "core.php";
 
-$query = "SELECT `id`, `password` FROM `users` WHERE `username` = '$username'";
-$result = mysqli_query($connection, $query);
+// Connect to the database
+$connection = connect();
 
-while($row = mysqli_fetch_assoc($result)) {
+// Create a new User object. only supplying available parameters
+$possibleUser = new User(
 
-    if (password_verify($password, $row['password'])) {
+	$username = $_POST["username"],
+	$password = $_POST["password"]
 
-        $_SESSION["username"] = $username;
-        $_SESSION["id"] = $row["id"];
-        session_write_close();
-        header("Location: /index.php");
+);
 
-    } else {
+$returnedUser = GetUser($possibleUser);
 
-        echo "Error - username/password combination does not exist";
-        echo "<br />";
-        echo "<button onclick='window.location.href = `http://www.nullpointerexception.ml/signup.php`';>Back</button>";
+if ($returnedUser) {
 
-    }
+	if ($result->verifyHash($returnedUser->password)) {
+
+
+
+	}
 
 }
 
-?>
-</body>
+function GetUser(User $possibleUser) {
+
+	$query = "SELECT `id`, `password` FROM `users` WHERE `username` = '$possibleUser->username'";
+	$result = mysqli_query($connection, $query);
+
+	if ($result) {
+
+		$user = new User($result["username"], $result["password"], $result["password_hash"], $result["first_name"], $result["last_name"], $result["email_address"]);
+
+		return $user;
+
+	} else {
+
+		return NULL;
+
+	}
+
+}
+
+function Login(User $user) {
+
+	$_SESSION["username"] = $user->username;
+	$_SESSION["id"] = $user->getID($connection);
+
+
+}

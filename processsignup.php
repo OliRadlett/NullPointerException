@@ -2,6 +2,7 @@
 
 session_start();
 include "connect.php";
+include "core.php";
 
 // Connect to the database
 $connection = connect();
@@ -190,7 +191,7 @@ function CreateAccount($connection, User $user) {
 	"INSERT INTO 
 	`users` (`username`, `password`, `first_name`, `last_name`, `email_address`)
 	VALUES
-	('$user->username', '$user->password_hash', '$user->first_name', '$user->last_name', '$user->email_address');";
+	('$user->username', '$user->generateHash()', '$user->first_name', '$user->last_name', '$user->email_address');";
     
     // Executes the MySQLi query, creating a new user record in the database
     mysqli_query($connection, $query);
@@ -207,40 +208,6 @@ function CreateAccount($connection, User $user) {
     // Closes the session and re-directs the user to the homepage
     session_write_close();
     redirect("http://nullpointerexception.ml");
-
-}
-
-function redirect($url) {
-
-	/**
-	* Safely re-directs the client to a specified URL
-	* 
-	* @param String $url - URL for the client to be re-directed to
-	* 
-	* @author Oli Radlett <o.radlett@gmail.com>
-	* 
-	*/
-
-    if (!headers_sent()) {
-
-    	// If no headers have been sent then it is safe to use the header() function to re-direct the client
-    	header('Location: ' . $url);
-        
-        exit;
-
-    } else {
-
-    	// If they have, then use the echo function to run a JavaScript script to safely re-direct the client
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="'.$url.'";';
-        echo '</script>';
-        echo '<noscript>';
-        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
-        echo '</noscript>';
-
-        exit;
-    
-    }
 
 }
 
@@ -266,38 +233,6 @@ function Error($message, $back_button) {
         echo "<button onclick='window.location.href = `http://www.nullpointerexception.ml/signup.php`';>Back</button>";
 
     }
-
-}
-
-class User {
-
-	/**
- 	* Class to define a user, store the user's attributes and creates hash of the user's password
- 	* 
- 	* @author Oli Radlett <o.radlett@gmail.com>
- 	* @since Commit 83 - 23/05/18
- 	* 
- 	*/
-	
-	public $username;
-	public $password;
-	public $password_hash;
-	public $first_name;
-	public $last_name;
-	public $email_address;
-
-	function __construct($username, $password, $first_name, $last_name, $email_address) {
-
-		$this->username = $username;
-		$this->password = $password;
-		$this->first_name = $first_name;
-		$this->last_name = $last_name;
-		$this->email_address = $email_address;
-
-		// Creates a hash of the user's password
-		$this->password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-
-	}
 
 }
 
