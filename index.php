@@ -1,5 +1,18 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+/**
+* Landing page for the website
+* 
+* @author Oli Radlett <o.radlett@gmail.com>
+* @since Commit 1
+* 
+*/
+
+session_start();
+include "database.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,20 +31,26 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
+    
     <?php
 
-    	$connection = connect();
+        // Create new Database object
+    	$database = new Database();
 
+        // Collect logging information about the user
         $address = $_SERVER["REMOTE_ADDR"];
         $_SESSION["IPADDR"] = $address;
         $date = date("d/m/Y");
         $time = date("h:ia");
-        $query = "INSERT INTO `visits` (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');";
 
-        echo mysqli_error($connection);
+        // Log user information in database
+        $database->query("INSERT INTO npe.visits (`address`, `date`, `time`) VALUES ('$address', '$date', '$time');");
 
+        // Include the universal page header
     	include ("header.html");
+
     ?>
+
     <br />
     <br />
     <br />
