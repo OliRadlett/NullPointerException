@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 require_once 'core.php';
 
 /**
-* Series of test classes for the core.php module
+* Series of test classes for the User class
 * 
 * @uses PHPUnit\Framework\TestCase
 * 
@@ -77,9 +77,14 @@ class UserTest extends TestCase {
 		* 
 		*/
 
+		$this->user = new User("testUsername", "testPassword", "testFirstName", "testLastName", "testEmailAddress");
+
+
 		$result = $this->user->verifyHash("testPassword");
 		$expected = true;
 		$this->assertSame($result, $expected);
+
+		unset($this->user);
 
 	}
 
@@ -101,9 +106,69 @@ class UserTest extends TestCase {
 		* 
 		*/
 
+		$this->user = new User("testUsername", "testPassword", "testFirstName", "testLastName", "testEmailAddress");
+
 		$result = $this->user->verifyHash("nonMatchingPassword");
 		$expected = false;
 		$this->assertSame($result, $expected);
+
+		unset($this->user);
+
+	}
+
+	function testAllAttributesFilled() {
+
+		/**
+		* 
+		* @test
+		* 
+		* Test to check that the User object can verify that all it's parameters are filled
+		*
+		* @return void 
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* @since Commit 96 - 20/08/18 
+		* 
+		* @covers User::allAttributesFilled
+		* @uses this->user
+		* 
+		*/
+
+		$this->user = new User("testUsername", "testPassword", "testFirstName", "testLastName", "testEmailAddress");
+
+		$result = $this->user->allAttributesFilled();
+		$expected = true;
+		$this->assertSame($result, $expected);
+
+		unset($this->user);
+
+	}
+
+	function testAllAttributesNotFilled() {
+
+		/**
+		* 
+		* @test
+		* 
+		* Test to check that the User object does not verify that all it's parameters are filled if they aren't
+		*
+		* @return void 
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* @since Commit 96 - 20/08/18 
+		* 
+		* @covers User::allAttributesFilled
+		* @uses this->user
+		* 
+		*/
+
+		$this->user = new User("testUsername", "testPassword", "testFirstName", "testLastName");
+
+		$result = $this->user->allAttributesFilled();
+		$expected = false;
+		$this->assertSame($result, $expected);
+
+		unset($this->user);
 
 	}
 

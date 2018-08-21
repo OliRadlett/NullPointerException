@@ -1,11 +1,12 @@
 <?php
 
 session_start();
-include "connect.php";
+
+include "database.php";
 include "core.php";
 
-// Connect to the database
-$connection = connect();
+// Create a new Database object
+$database = new Database();
 
 // Create a new user object
 $user = new User(
@@ -18,31 +19,32 @@ $user = new User(
 
 );
 
-if (!blocked_ip($connection, $_SESSION["IPADDR"])) {
+// These nested if statements could do with being tidyed up somehow
+if (!Util::isIpBlocked($_SERVER["REMOTE_ADDR"], $database)) {
 
-	if (AllAttributesFilled($user)) {
+	if ($user->allAttributesFilled()) {
 
-		if (EmailValid($user)) {
+		if (Util::emailValid($user->getEmail())) {
 
-			if (UniqueUsername($connection, $user)) {
+			if (UniqueUsername($database, $user)) {
 
-				CreateAccount($connection, $user);
+				$user->create($database);
 
 			} else {
 
-				Error("Error - That username is already taken", true);
+				Error("Error - That username is already taken", true, "signup.php");
 
 			}
 
 		} else {
 
-			Error("Error - Please enter a valid email", true);
+			Error("Error - Please enter a valid email", true, "signup.php");
 
 		}
 
 	} else {
 
-		Error("Error - Please make sure all fields have been filled", true);
+		Error("Error - Please make sure all fields have been filled", true, "signup.php");
 
 	}
 
@@ -52,102 +54,12 @@ if (!blocked_ip($connection, $_SESSION["IPADDR"])) {
 
 }
 
-
-function blocked_ip($connection, $address) {
-
-	/**
-	* Queries the database to check if the client's IP Address has been banned from creating an account
-	* 
-	* @param MySQLi connection $connection - Database connection object
-	* @param String $address - Client's IP Address
-	* 
-	* @author Oli Radlett <o.radlett@gmail.com>
-	* 
-	* @return True if the client's IP Address has been blocked, False if not
-	* 
-	*/
-
-	$query = "SELECT `address` FROM `blocked_ipaddr` WHERE `address` = '$address'";
-	$result = mysqli_query($connection, $query);
-
-	if (mysqli_num_rows($result) > 0) {
-
-		// If any results are returned from the database then the address has been blocked
-		return true;	
-
-	} else {
-
-		// If not then the user isn't blocked
-		return false;
-
-	}
-
-}
-
-function AllAttributesFilled(User $user) {
-
-	/**
-	* Checks that all the User object's attributes contain values
-	* 
-	* @param User $user - User object
-	* 
-	* @author Oli Radlett <o.radlett@gmail.com>
-	* 
-	* @return True if all the User object's attributes are filled, False if not
-	* 
-	*/
-
-	if (!empty($user->username) &&
-		!empty($user->password) &&
-		!empty($user->first_name) &&
-		!empty($user->last_name) &&
-		!empty($user->emailaddress)) {
-
-		// If all the User object's attributes contain a value then the function can return true
-		return true;
-
-	} else {
-
-		// If any of the User object's attributes are empty then the function returns false
-		return false;
-
-	}
-
-}
-
-function EmailValid(User $user) {
-
-	/**
-	* Checks if the User object's email attribute is a valid email address
-	* 
-	* @param User $user - User object
-	* 
-	* @author Oli Radlett <o.radlett@gmail.com>
-	* 
-	* @return True if the User object's email attribute is a valid email address, False if not
-	* 
-	*/
-
-	if (filter_var($user->emailaddress, FILTER_VALIDATE_EMAIL)) {
-
-		// If the User object's email address attribute passes this check then it is a valid email address
-		return true;
-
-	} else {
-
-		// If not then the function returns false
-		return false;
-
-	}
-
-}
-
-function UniqueUsername($connection, User $user) {
+function UniqueUsername(Database $database, User $user) {
 
 	/**
 	* Queries the database to check that no user has the same email address
 	* 
-	* @param MySQLi connection $connection - Database connection object
+	* @param Database object $database - Pointer to the Database object in use
 	* @param User $user - User object
 	* 
 	* @author Oli Radlett <o.radlett@gmail.com>
@@ -156,11 +68,10 @@ function UniqueUsername($connection, User $user) {
 	* 
 	*/
 
-	$query = "SELECT `id` FROM `users` WHERE `username` = '$user->username'";
-    $result = mysqli_query($connection, $query);
-    $num_rows = mysqli_num_rows($result);
+	$database->query("SELECT `id` FROM npe.users WHERE `username` = '$user->getUsername()'");
+    $numRows = $database->numRows();
 
-    if ($num_rows == 0) {
+    if ($numRows == 0) {
 
     	// If no rows are returned from the database then no user has the same username as the new user
     	return true;
@@ -174,7 +85,7 @@ function UniqueUsername($connection, User $user) {
 
 }
 
-function CreateAccount($connection, User $user) {
+/*function CreateAccount($connection, User $user) {
 
 	/**
 	* Creates a new user record in the database
@@ -184,7 +95,6 @@ function CreateAccount($connection, User $user) {
 	* 
 	* @author Oli Radlett <o.radlett@gmail.com>
 	* 
-	*/
 
 	// Prepares a query to insert all the User object's attributes into the database in their individual columns, skipping the auto-incrementing id column
 	$query = 
@@ -209,31 +119,6 @@ function CreateAccount($connection, User $user) {
     session_write_close();
     redirect("http://nullpointerexception.ml");
 
-}
-
-function Error($message, $back_button) {
-
-    /**
-    * Display an error message to the client, as well as an optional back button
-    * 
-    * @param String $message - Error message to be outputted to the client
-    * @param Boolean $back_button - Boolean parameter specifying whether to display a back button
-    * 
-    * @author Oli Radlett <o.radlett@gmail.com>
-    * 
-    */
-
-    echo $message;
-    // Line break
-    echo "<br/>";
-
-    if ($back_button) {
-
-        // If the back_button parameter is true, display a back button
-        echo "<button onclick='window.location.href = `http://www.nullpointerexception.ml/signup.php`';>Back</button>";
-
-    }
-
-}
+}*/
 
 ?>

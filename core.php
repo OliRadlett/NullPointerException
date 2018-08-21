@@ -196,39 +196,200 @@ class User {
 
 	}
 
+	function allAttributesFilled() {
+
+		/**
+		* 
+		* 
+		* 
+		*
+		*/
+
+		if (Util::_isset($this->username, $this->password, $this->first_name, $this->last_name, $this->email_address)) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+	function create(Database $database) {
+
+		$this->password_hash = $this->generateHash();
+		$database->query("INSERT INTO 
+	npe.users (`username`, `password`, `first_name`, `last_name`, `email_address`)
+	VALUES
+	('$this->username', '$this->password_hash', '$this->first_name', '$this->last_name', '$this->email_address');");
+
+		// Prepares another query to get the auto-generated user id from the database
+	    $database->query("SELECT `id` FROM `users` WHERE `username` = '$this->getUsername'");
+	    // Executes the above query and stores the value of retrieved user id
+	    $id = $database->getResult();
+
+	    // Stores the username and user if in session variables, thus logging the user in
+	    $_SESSION["username"] = $this->username;
+	    $_SESSION["id"] = $id;
+
+	    // Closes the session and re-directs the user to the homepage
+	    session_write_close();
+	    Util::redirect("http://nullpointerexception.ml");
+
+	}
+
+	function delete() {
+
+
+
+	}
+
 }
 
-function redirect($url) {
+class Util {
 
-	/**
-	* Safely re-directs the client to a specified URL
-	* 
-	* @param String $url - URL for the client to be re-directed to
-	* 
-	* @author Oli Radlett <o.radlett@gmail.com>
-	* 
-	*/
+	public static function redirect($url) {
 
-    if (!headers_sent()) {
+		/**
+		* Safely re-directs the client to a specified URL
+		* 
+		* @param String $url - URL for the client to be re-directed to
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* 
+		*/
 
-    	// If no headers have been sent then it is safe to use the header() function to re-direct the client
-    	header('Location: ' . $url);
-        
-        exit;
+	    if (!headers_sent()) {
 
-    } else {
+	    	// If no headers have been sent then it is safe to use the header() function to re-direct the client
+	    	header('Location: ' . $url);
+	        
+	        exit;
 
-    	// If they have, then use the echo function to run a JavaScript script to safely re-direct the client
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="'.$url.'";';
-        echo '</script>';
-        echo '<noscript>';
-        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
-        echo '</noscript>';
+	    } else {
 
-        exit;
-    
-    }
+	    	// If they have, then use the echo function to run a JavaScript script to safely re-direct the client
+	        echo '<script type="text/javascript">';
+	        echo 'window.location.href="'.$url.'";';
+	        echo '</script>';
+	        echo '<noscript>';
+	        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+	        echo '</noscript>';
+
+	        exit;
+	    
+	    }
+
+	}
+
+	public static function isIPBlocked($address, $database) {
+
+		/**
+		* Queries the database to check if the client's IP Address has been banned from creating an account
+		* 
+		* @param String $address - Client's IP Address
+		* @param Database object $database - Pointer to the Database object in use
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* 
+		* @return True if the client's IP Address has been blocked, False if not
+		* 
+		*/
+
+		$database->query("SELECT `address` FROM npe.blocked_ipaddr WHERE `address` = '$address'");
+		$numRows = $database->numRows();
+
+		// If any results are returned from the query then the address has been blocked
+		if ($numRows > 0) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+	public static function _isset(...$vars) {
+
+		/**
+		* Function to check whether a series of values contain any data
+		* 
+		* @param ...$vars - An unspecified number of variables to check
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* @since Commit 96 - 21/08/18
+		* 
+		*/
+
+		// Loop through all supplied variable
+		foreach ($vars as $var) {
+
+	        if (!isset($var)) {
+	        
+	            return false;
+	        
+	        }
+	    
+	    }
+	    
+	    return true;
+
+	}
+
+	public static function emailValid($email) {
+
+		/**
+		* Checks if the User object's email attribute is a valid email address
+		* 
+		* @param String $email - Email address to validate
+		* 
+		* @author Oli Radlett <o.radlett@gmail.com>
+		* 
+		* @return True if the email parameter is a valid email address, False if not
+		* 
+		*/
+
+		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+	public static function Error($message, $backButton, $backURL = NULL) {
+
+	    /**
+	    * Display an error message to the client, as well as an optional back button
+	    * 
+	    * @param String $message - Error message to be outputted to the client
+	    * @param Boolean $backButton - Boolean parameter specifying whether to display a back button
+	    * @param String $backURL - Optional String supplying the URL for the button
+	    * 
+	    * @author Oli Radlett <o.radlett@gmail.com>
+	    * 
+	    */
+
+	    echo $message;
+	    echo "<br/>";
+
+	    if ($backButton) {
+
+	        // If the back_button parameter is true, display a back button
+	        echo "<button onclick='window.location.href = `" . $backURL . "`';>Back</button>";
+
+	    }
+
+	}
 
 }
 
