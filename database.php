@@ -57,7 +57,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The raw value returned from the database. No return value if there is no result from the query or an error has occured
+		* @return String: The raw value returned from the database. No return value if there is no result from the query or an error has occurred
 		* @throws Error executing query
 		* 
 		*/
@@ -89,7 +89,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The current query result stored for an instance of the Database class
+		* @return String: The current query result stored for an instance of the Database class
 		* 
 		*/
 
@@ -105,7 +105,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The current query stored for an instance of the Database class
+		* @return String: The current query stored for an instance of the Database class
 		* 
 		*/
 
@@ -121,7 +121,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The current MySQLi connection object for an instance of the Database class
+		* @return String: The current MySQLi connection object for an instance of the Database class
 		* 
 		*/
 
@@ -137,7 +137,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The an associative array of the results returned from the database. No return value if nothing is stored in $this->result
+		* @return String: The an associative array of the results returned from the database. No return value if nothing is stored in $this->result
 		* 
 		*/
 
@@ -157,7 +157,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return The number of results returned from a MySQLi query. No return value if nothing is stored in $this->result
+		* @return String: The number of results returned from a MySQLi query. No return value if nothing is stored in $this->result
 		* 
 		*/
 
