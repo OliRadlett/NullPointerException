@@ -3,3 +3,5 @@ connect.php
 catify.js
 \~*
 vendor
+.idea
+.vagrant
