@@ -121,7 +121,7 @@ class Database {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 95 - 21/08/18
 		* 
-		* @return String: The current MySQLi connection object for an instance of the Database class
+		* @return MySQLi connection object: The current MySQLi connection object for an instance of the Database class
 		* 
 		*/
 
