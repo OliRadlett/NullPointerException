@@ -60,16 +60,56 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
 
+  class Username
+    def to_s
+      print "Please enter your GitHub credentials\n"
+      print "Username: "
+      STDIN.gets.chomp
+    end
+  end
+
+   class Password
+     def to_s
+       begin
+       system 'stty -echo'
+       print "Password: "
+       pass = URI.escape(STDIN.gets.chomp)
+       ensure
+       system 'stty echo'
+       end
+       pass
+     end
+   end
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y apache2
-    apt-get install -y git
-    apt-get install -y php
-    apt-get update
-    apt-get upgrade -y
-    apt-get autoremove -y
+  config.vm.provision "shell", env: {"USERNAME" => Username.new, "PASSWORD" => Password.new},  inline: <<-SHELL
+    # Install packages
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    sudo apt-get install -y git
+    sudo add-apt-repository -y ppa:ondrej/php
+    sudo apt-get update
+    sudo apt-get install -y php7.1
+    sudo apt-get install -y php7.1-mysqli
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get autoremove -y
+    # Show PHP errors
+    sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/cli/php.ini
+    sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/cli/php.ini
+    sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/apache2/php.ini
+    sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/apache2/php.ini
+    # Enable MySQLi
+    phpenmod mysqli
+    # Restart apache to apply changes to ini file
+    sudo service apache2 restart
+    # Delete auto-generated index.html file
+    sudo rm -f -- /var/www/html/index.html
+    # Delete old connection details
+    sudo rm -f -r -- /var/www/private/
+    # Download connection details from git repo
+    git clone https://$USERNAME:$PASSWORD@github.com/$USERNAME/NullPointerException-private /var/www/private/
   SHELL
 end
