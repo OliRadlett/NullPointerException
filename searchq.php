@@ -51,7 +51,7 @@ $database = new Database();
 						<input class = "form-control" placeholder="Search question..." id = "search"/>
 					</div>
                     <!--Download questions when search button clicked-->
-					<button type="submit" class="btn btn-primary mb-2" onclick = "return Download()">Search</button>
+					<button type="submit" class="btn btn-primary mb-2" onclick = "return download()">Search</button>
 				</form>
 			</div>
 		</div>

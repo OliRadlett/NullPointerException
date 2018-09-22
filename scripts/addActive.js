@@ -17,7 +17,7 @@ function addActive() {
 
 	if (page == "qa") {
 
-		Download();
+		download();
 
 	}
 
