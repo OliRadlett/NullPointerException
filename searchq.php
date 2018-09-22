@@ -1,5 +1,23 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+/**
+ * Page used to search for questions and display result in a table ordered by relevance
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+// Start new PHP session
+session_start();
+
+// Include Database class
+include "database.php";
+
+// Create a new Database object
+$database = new Database();
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,7 +29,12 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-	<?php include 'header.html';?>
+	<?php
+
+//      Include the HTML page header
+        include 'header.html';
+
+    ?>
 	<br/>
 	<br/>
 	<div class = "container">
@@ -22,10 +45,12 @@ include "connect.php"; ?>
 		</div>
 		<div class = "row">
 			<div class = "col-sm-12">
+                <!--Stop form from being able to submit-->
 				<form class = "form-inline" onsubmit="return false;">
 					<div class="form-group mx-sm-3 mb-2">
 						<input class = "form-control" placeholder="Search question..." id = "search"/>
 					</div>
+                    <!--Download questions when search button clicked-->
 					<button type="submit" class="btn btn-primary mb-2" onclick = "return Download()">Search</button>
 				</form>
 			</div>
