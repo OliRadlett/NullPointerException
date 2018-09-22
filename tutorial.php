@@ -1,5 +1,15 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+// Start PHP session
+session_start();
+
+// Include Database class
+include "database.php";
+
+// Create new Database object
+$database = new Database();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +21,14 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php include ("header.html"); ?>
+
+    <?php
+
+//      Include universal page header
+        include ("header.html");
+
+    ?>
+
     <br/>
     <br/>
     <div class = "container">
