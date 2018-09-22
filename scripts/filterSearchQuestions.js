@@ -1,12 +1,12 @@
-var httpRequest;
-var url;
+let httpRequest;
+let url;
 
 window.onload = Download;
 
 function Download() {
 
-    var search = document.getElementById("search");
-    var query = search.value;
+    let search = document.getElementById("search");
+    let query = search.value;
 
     if (query !== "") {
 
@@ -27,7 +27,7 @@ function Download() {
 
     } else {
 
-        var table = document.getElementById("questionsTable");
+        let table = document.getElementById("questionsTable");
         wipeTable(table);
         createBlankResult(table, "Search for questions above...");
 
@@ -41,9 +41,9 @@ function Output() {
 
         if (httpRequest.status === 200) {
             
-            var request = httpRequest.response;
-            var questionArray = request.split("<br/>");
-            var table = document.getElementById("questionsTable");
+            let request = httpRequest.response;
+            let questionArray = request.split("<br/>");
+            let table = document.getElementById("questionsTable");
 
             wipeTable(table);
 
@@ -79,14 +79,14 @@ function wipeTable(table) {
 
 function createElements(questionArray, table) {
 
-    for (var i = 0; i < questionArray.length - 1; i += 3) {
+    for (let i = 0; i < questionArray.length - 1; i += 3) {
 
-        var tr = document.createElement("tr");
-        var title = document.createElement("td");
-        var score = document.createElement("td");
-        var link = document.createElement("a");
-        var titleString = document.createTextNode(questionArray[i]);
-        var scoreString = document.createTextNode(questionArray[i + 2]);
+        let tr = document.createElement("tr");
+        let title = document.createElement("td");
+        let score = document.createElement("td");
+        let link = document.createElement("a");
+        let titleString = document.createTextNode(questionArray[i]);
+        let scoreString = document.createTextNode(questionArray[i + 2]);
 
         link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
         link.appendChild(titleString);
@@ -103,10 +103,10 @@ function createElements(questionArray, table) {
 
 function createBlankResult(table, msg) {
 
-    var tr = document.createElement("tr");
-    var td1 = document.createElement("td");
-    var td2 = document.createElement("td");
-    var string = document.createTextNode(msg);
+    let tr = document.createElement("tr");
+    let td1 = document.createElement("td");
+    let td2 = document.createElement("td");
+    let string = document.createTextNode(msg);
     td1.appendChild(string);
     tr.appendChild(td1);
     tr.appendChild(td2);
