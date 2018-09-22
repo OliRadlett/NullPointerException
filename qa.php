@@ -1,5 +1,9 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+session_start();
+include "database.php";
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +16,9 @@ include "connect.php"; ?>
 </head>
 <body>
     <?php
+
     include ("header.html");
+
     ?>
     <br />
     <br />
@@ -35,11 +41,11 @@ include "connect.php"; ?>
             </div>
             <div class = "col-sm-2">
                 <br/>
-                <button id = "BIGBUTTon" class = "text-right btn btn-primary" onclick = "window.location.href = 'searchq.php';"><h5>Search question</h5></button>
+                <button id = "large_button" class = "text-right btn btn-primary" onclick = "window.location.href = 'searchq.php';"><h5>Search question</h5></button>
             </div>
             <div class = "col-sm-2">
                 <br/>
-                <button id = "BIGBUTTon" class = "text-right btn btn-primary" onclick = "window.location.href = 'ask.php';"><h5>Ask question</h5></button>
+                <button id = "large_button" class = "text-right btn btn-primary" onclick = "window.location.href = 'ask.php';"><h5>Ask question</h5></button>
             </div>
         </div>
         <div class = "row">
