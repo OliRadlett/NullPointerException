@@ -4,7 +4,7 @@
  *
  * Page to display a question to the user as well as show comments on the question
  *
- * @author Oli Radlett
+ * @author Oli Radlett <o.radlett@gmail.com>
  *
  */
 
