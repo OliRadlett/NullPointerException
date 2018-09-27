@@ -39,7 +39,7 @@ if ($database->numRows()!== 1) {
 //      Close the session in order to preserve session variables and headers
         session_write_close();
 //      Redirect the user back to the questions page
-        Util::redirect("Location: /qa.php");
+        Util::redirect("qa.php");
 
 //  If either the question title or the question are empty produce an error and a back button
     } else {
