@@ -136,7 +136,6 @@
 
                             } else {
 
-                                //var_dump($questionArray[$i]);
                                 echo htmlspecialchars(substr($questionArray[$i], 1));
 
                             }
@@ -151,13 +150,25 @@
             </div>
             <div class = "col-lg-1">
               <a href = "#" onclick = "Vote(`up`)"><img src = "img/up_grey.png" id = "UpArrow"/></a>
-              <h4><?php echo $qVotes ?></h4>
+              <h4>
+                  <?php
+
+                    echo $qVotes
+
+                  ?>
+              </h4>
               <a href = "#" onclick = "Vote(`down`)"><img src = "img/down_grey.png" id = "DownArrow"/></a>
             </div>
         </div>
         <div class = "row">
             <div class = "col-lg-10">
-                <i id = "author">Asked by: <b><?php echo $qAuthor; ?></b></i>
+                <i id = "author">Asked by: <b>
+                        <?php
+
+                            echo $qAuthor;
+
+                        ?>
+                    </b></i>
             </div>
         </div>
         <br/>
@@ -172,7 +183,9 @@
             </div>
             <div class ="col-2">
                 <?php
+
                     echo '<button class = "btn btn-primary" onclick = "window.location.href = `comment.php?id=' . $_GET["id"] . '`">Comment</button>';
+
                 ?>
             </div>
         </div>
