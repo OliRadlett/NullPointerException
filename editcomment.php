@@ -1,6 +1,22 @@
-<?php session_start();
-include "connect.php";
-include "questionFuncs.php"?>
+<?php
+
+/**
+ *
+ * Page to allow the user to edit one of their comments
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+// Start PHP session
+session_start();
+
+// Include core files
+include "database.php";
+include "core.php";
+include "questionFuncs.php"
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,20 +30,27 @@ include "questionFuncs.php"?>
 <body>
     <?php
 
-        $connection = connect();
-    	  include ("header.html");
+//      Create new Database object
+        $database = new Database();
 
+//      Include universal header file
+    	include ("header.html");
+
+//    	Check if the user is logged in
         if (!isset($_SESSION["username"])) {
 
+//          If they aren't logged in close headers and redirect the user to an error page
             session_write_close();
-            header("Location: /error.php?error=notloggedin");
+            Util::redirect("error.php?error=notloggedin");
 
         }
 
-        if (!isUsersComment($connection, $_SESSION["username"], $_GET["id"])) {
+//      Check if the user logged in is the same user who created the comment they are trying to edit
+        if (!isUsersComment($database, $_SESSION["username"], $_GET["id"])) {
 
-          session_write_close();
-          header("Location: /error.php?error=unauth");
+//          If the current logged in user did not create the comment they are trying to edit close headers and redirect the user to an error page
+            session_write_close();
+            Util::redirect("error.php?error=unauth");
 
         }
 
@@ -41,7 +64,7 @@ include "questionFuncs.php"?>
         <form method = "post" action = <?php echo "'/processeditcomment.php?id=" . $_GET["id"] . "&qid=" . $_GET["qid"] . "'"; ?>>
             <div class="form-group">
                 <label><u>Comment:</u></label>
-                <input type = "text" class = "form-control" value=<?php echo "'" . GetComment($connection, $_GET["id"]) . "'";?> placeholder=<?php echo "'" . GetComment($connection, $_GET["id"]) . "'";?> name = "comment"/>
+                <input type = "text" class = "form-control" value=<?php echo "'" . GetComment($database, $_GET["id"]) . "'";?> placeholder=<?php echo "'" . GetComment($database, $_GET["id"]) . "'";?> name = "comment"/>
             </div>
             <button type="submit" class="btn btn-primary">Edit comment</button>
         </form>

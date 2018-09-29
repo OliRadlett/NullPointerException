@@ -1,6 +1,12 @@
-<?php session_start();
-include "connect.php";
-$connection = connect();
+<?php
+
+// Doc-comments coming later
+
+session_start();
+include "database.php";
+
+$database = new Database();
+
 $type = $_GET["type"];
 if ($type == "new") {
     $query = "SELECT * FROM `questions` ORDER BY `id` DESC LIMIT 10";
@@ -11,17 +17,17 @@ if ($type == "new") {
     // Maybe it should be limited to 10 after the processing has been completed.
     $query = "SELECT * FROM `questions` LIMIT 10";
 }
-$result = mysqli_query($connection, $query);
+$database->query($query);
 if ($type !== "hot") {
-    notHot($result);
+    notHot($database);
 } else if ($type == "hot") {
-    hot($result);
+    hot($database);
 }
 
-function hot($result) {
+function hot(Database $database) {
 	$scoreArray = array();
     $array = array();
-    while($row = mysqli_fetch_assoc($result)) {
+    while($row = $database->fetchAssoc()) {
         $points = $row["votes"];
         $order = log(max(abs($points), 1), 10);
         if ($points > 0) {
@@ -44,8 +50,8 @@ function hot($result) {
     }
 }
 
-function notHot($result) {
-	while($row = mysqli_fetch_assoc($result)) {
+function notHot(Database $database) {
+	while($row = $database->fetchAssoc()) {
         echo $row["title"] . "<br/>";
         echo $row["id"] . "<br/>";
         echo $row["votes"] . "<br/>";
@@ -55,4 +61,5 @@ function notHot($result) {
 function sortOrder($a, $b) {
     return $b["score"] - $a["score"];
 }
+
 ?>

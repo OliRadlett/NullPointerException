@@ -1,5 +1,22 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+/**
+ *
+ * Page for a user to comment on a specific question
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+//  Start PHP session
+    session_start();
+
+//  Include core files
+    include "database.php";
+    include "core.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,14 +29,19 @@ include "connect.php"; ?>
 </head>
 <body>
     <?php
-    	
-        $connection = connect();
+
+        //  Create new Database object
+        $database = new Database();
+
+//      Include universal page header
     	include ("header.html");
 
+//    	Check if the user is logged in
         if (!isset($_SESSION["username"])) {
 
+//          If the user is not logged in close headers and redirect them to an error page
             session_write_close();
-            header("Location: /error.php?error=notloggedin");
+            Util::redirect("error.php?error=notloggedin");
 
         }
 

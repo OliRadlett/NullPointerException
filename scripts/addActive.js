@@ -14,8 +14,7 @@ function addActive() {
 
 	}
 	// Overrides any window.onload event so run any JS functions in pages on header from here:
-
-	if (page == "qa") {
+	if (page === "qa") {
 
 		Download();
 

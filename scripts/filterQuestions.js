@@ -1,12 +1,12 @@
-var httpRequest;
-var url;
+let httpRequest;
+let url;
 
 window.onload = Download;
 
 function Download() {
 
-    var select = document.getElementById("select");
-    var type = select.options[select.selectedIndex].text.toLowerCase();
+    let select = document.getElementById("select");
+    let type = select.options[select.selectedIndex].text.toLowerCase();
 
     httpRequest = new XMLHttpRequest();
     url = "/downloadquestions.php?type=" + type;
@@ -31,10 +31,10 @@ function Output() {
 
         if (httpRequest.status === 200) {
             
-            var request = httpRequest.response;
-            var questionArray = request.split("<br/>");
+            let request = httpRequest.response;
+            let questionArray = request.split("<br/>");
             
-            var table = document.getElementById("questionsTable");
+            let table = document.getElementById("questionsTable");
 
             while (table.hasChildNodes()) {
                 
@@ -56,14 +56,14 @@ function Output() {
 
 function createElements(questionArray, table) {
 
-    for (var i = 0; i < questionArray.length - 1; i += 3) {
+    for (let i = 0; i < questionArray.length - 1; i += 3) {
 
-        var tr = document.createElement("tr");
-        var title = document.createElement("td");
-        var score = document.createElement("td");
-        var link = document.createElement("a");
-        var titleString = document.createTextNode(questionArray[i]);
-        var scoreString = document.createTextNode(questionArray[i + 2]);
+        let tr = document.createElement("tr");
+        let title = document.createElement("td");
+        let score = document.createElement("td");
+        let link = document.createElement("a");
+        let titleString = document.createTextNode(questionArray[i]);
+        let scoreString = document.createTextNode(questionArray[i + 2]);
 
         link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
         link.appendChild(titleString);

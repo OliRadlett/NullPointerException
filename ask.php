@@ -1,5 +1,9 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+session_start();
+include "database.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +17,8 @@ include "connect.php"; ?>
 <body>
     <?php
     	
-        $connection = connect();
+        $database = new Database();
+
     	include ("header.html");
 
         if (!isset($_SESSION["username"])) {

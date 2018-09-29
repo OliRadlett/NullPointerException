@@ -1,5 +1,24 @@
-<?php session_start();
-include "connect.php"; ?>
+<?php
+
+/**
+ *
+ * Page to display information about the Python3 programming language
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+//  Start PHP session
+    session_start();
+
+//  Include Database class
+    include "database.php";
+
+//  Create a new Database object
+    $database = new Database();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +29,14 @@ include "connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php include ("header.html"); ?>
+
+    <?php
+
+//      Include the universal page header
+        include ("header.html");
+
+    ?>
+
     <br/>
     <br/>
     <div class = "container">

@@ -18,7 +18,7 @@ class User {
 	public $email_address;
 
 	// Parameters set to NULL by default allows all parameters to be optional
-	function __construct($username = NULL, $password = NULL, $first_name = NULL, $last_name = NULL, $email_address = NULL) {
+	function __construct($username = NULL, $password = NULL, $password_hash = NULL, $first_name = NULL, $last_name = NULL, $email_address = NULL) {
 
 		$this->username = $username;
 		$this->password = $password;
@@ -31,9 +31,18 @@ class User {
 
 			$this->password_hash = $this->generateHash();
 
-		}
+		} else {
 
-	}
+//          If the password parameter is not provided but the password_hash parameter is store it in the class
+		    if (isset($password_hash)) {
+
+		        $this->password_hash = $password_hash;
+
+            }
+
+        }
+
+    }
 
 	function getPassword() {
 
@@ -43,7 +52,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current password stored in an instance of the User object
+		* @return String: The current password stored in an instance of the User object
 		* 
 		*/
 
@@ -59,7 +68,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current password hash stored in an instance of the User object
+		* @return String: The current password hash stored in an instance of the User object
 		* 
 		*/
 
@@ -75,7 +84,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current username stored in an instance of the User object
+		* @return String: The current username stored in an instance of the User object
 		* 
 		*/
 
@@ -91,7 +100,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current first name stored in an instance of the User object
+		* @return String: The current first name stored in an instance of the User object
 		* 
 		*/
 
@@ -107,7 +116,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current last name stored in an instance of the User object
+		* @return String: The current last name stored in an instance of the User object
 		* 
 		*/
 
@@ -123,7 +132,7 @@ class User {
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* @since Commit 91 - 20/08/18
 		* 
-		* @return The current email address stored in an instance of the User object
+		* @return String: The current email address stored in an instance of the User object
 		* 
 		*/
 
@@ -138,7 +147,7 @@ class User {
 		* 
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* 
-		* @return A hash of the User object's password using the default hashing algorithm
+		* @return String: A hash of the User object's password using the default hashing algorithm
 		*/
 
 		// Generates a hash of the user's password
@@ -161,7 +170,7 @@ class User {
 
 		if (password_verify($password, $this->password_hash)) {
 
-			// If the password paramater provided matches the hash of the password stored in this instance of the User class, return true
+			// If the password parameter provided matches the hash of the password stored in this instance of the User class, return true
 			return true;
 
 		} else {
@@ -173,37 +182,38 @@ class User {
 
 	}
 
-	function getID($connection) {
+	function getID(Database $database) {
 
 		/**
 		* Queries the database to return the id attribute of the user where the username attribute in the database equals the username stored in this instance of the Username class
 		* 
-		* @param MySQLi connection object $connection - MySQLi connection object to allow the function to query the database
+		* @param Database $database
 		* 
 		* @author Oli Radlett <o.radlett@gmail.com>
 		* 
-		* @return the id attribute from the database of the user with the username attibute equal to the username attribute stored in this instance of the User class 
+		* @return Int: the id attribute from the database of the user with the username attribute equal to the username attribute stored in this instance of the User class
 		* 
 		*/
 
-		// Prepare a MySQLi query statement to select the id attribute from the database where the username attribute is equal to the 
-		$query = "SELECT `id` FROM `users` WHERE `username` = '$this->username'";
-		// Stores the result of the query localy
-		$id = mysqli_query($connection, $query);
+		// Prepare and runs a MySQL query to select the id attribute from the users table where the username attribute is equal to the value stored in $this->username
+		$result = $database->query("SELECT `id` FROM `users` WHERE `username` = '$this->username'");
 
 		// Return the id from the database
-		return $id;
+		return $result;
 
 	}
 
 	function allAttributesFilled() {
 
-		/**
-		* 
-		* 
-		* 
-		*
-		*/
+        /**
+         *
+         * Function to check if all the attributes of an instance of a User object pass an isset check
+         *
+         * @author Oli Radlett <o.radlett@gmail.com>
+         *
+         * @return Boolean: true if all attributes are filled, false if not
+         *
+         */
 
 		if (Util::_isset($this->username, $this->password, $this->first_name, $this->last_name, $this->email_address)) {
 
@@ -219,7 +229,21 @@ class User {
 
 	function create(Database $database) {
 
+        /**
+         *
+         * Function to add an instance of a User object to the database as a new user
+         *
+         * @param Database: $database
+         *
+         * @author Oli Radlett <o.radlett@gmail.com>
+         *
+         * @since Commit 129, 22/09/18
+         *
+         */
+
+//        Generate a new hash of the password
 		$this->password_hash = $this->generateHash();
+//		Perform INSERT query to add the user to the database
 		$database->query("INSERT INTO 
 	npe.users (`username`, `password`, `first_name`, `last_name`, `email_address`)
 	VALUES
@@ -236,16 +260,10 @@ class User {
 
 	    // Closes the session and re-directs the user to the homepage
 	    session_write_close();
-	    Util::redirect("http://nullpointerexception.ml");
+	    Util::redirect("index.php");
 
 	}
-
-	function delete() {
-
-
-
-	}
-
+	
 }
 
 class Util {

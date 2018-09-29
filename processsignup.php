@@ -10,16 +10,17 @@ $database = new Database();
 
 // Create a new user object
 $user = new User(
-	
-	$_POST["username"],
-	$_POST['password'],
-	$_POST['firstname'],
-	$_POST['lastname'],
-	$_POST['emailaddress']
+
+    $_POST["username"],
+    $_POST['password'],
+    null,
+    $_POST['firstname'],
+    $_POST['lastname'],
+    $_POST['emailaddress']
 
 );
 
-// These nested if statements could do with being tidyed up somehow
+// These nested if statements could do with being tidied up somehow
 if (!Util::isIpBlocked($_SERVER["REMOTE_ADDR"], $database)) {
 
 	if ($user->allAttributesFilled()) {
@@ -32,25 +33,25 @@ if (!Util::isIpBlocked($_SERVER["REMOTE_ADDR"], $database)) {
 
 			} else {
 
-				Error("Error - That username is already taken", true, "signup.php");
+				Util::Error("Error - That username is already taken", true, "signup.php");
 
 			}
 
 		} else {
 
-			Error("Error - Please enter a valid email", true, "signup.php");
+            Util::Error("Error - Please enter a valid email", true, "signup.php");
 
 		}
 
 	} else {
 
-		Error("Error - Please make sure all fields have been filled", true, "signup.php");
+        Util::Error("Error - Please make sure all fields have been filled", true, "signup.php");
 
 	}
 
 } else {
 
-    Error("You have been banned from creating accounts", false);
+    Util::Error("You have been banned from creating accounts", false);
 
 }
 

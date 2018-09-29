@@ -1,3 +1,14 @@
+<?php
+
+/**
+ *
+ * 404 page for NullPointerException
+ *
+ * @author Oli Radlett
+ *
+ */
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +20,10 @@
 </head>
 <body>
     <?php
+
+//      Include universal page header
     	include ("header.html");
+
     ?>
     <br />
     <br />

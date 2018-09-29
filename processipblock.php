@@ -1,36 +1,35 @@
-<?php session_start();
-include "connect.php"; ?>
-<head>
-</head>
-<body>
-<?php $connection = connect();
+<!DOCTYPE html>
+<?php
 
-if (!$connection) {
+// Start PHP session
+session_start();
 
-    die("Connection failed: " . mysqli_connect_error());
+// Include Database class
+include "database.php";
 
-} else {
-
-    $ipaddr = $_POST['ipaddr'];
-    $date = date("d/m/Y");
-    
-    $query = "INSERT INTO `blocked_ipaddr` (`address`, `date_banned`) VALUES ('$ipaddr', '$date')";
-    
-    if (!mysqli_query($connection, $query)) {
-        
-        echo mysqli_error($connection);
-        
-    } else {
-
-        echo "IP address blocked";
-        echo "<br />";
-        ?>
-        <button onclick = "window.location.href='http://www.nullpointerexception.ml//admin.php'">Back</button>
-        <?php
-
-    }
-
-}
+// Create new Database object
+$database = new Database();
 
 ?>
+
+<head>
+    <title>Blocking IP Address...</title>
+</head>
+<body>
+
+<?php
+
+// Create variables from POST
+$ipaddr = $_POST['ipaddr'];
+$date = date("d/m/Y");
+
+// Block IP Address
+$database->query("INSERT INTO `blocked_ipaddr` (`address`, `date_banned`) VALUES ('$ipaddr', '$date')");
+
+echo "IP address blocked";
+echo "<br />";
+
+?>
+
+<button onclick = "window.location.href='http://www.nullpointerexception.ml//admin.php'">Back</button>
 </body>
