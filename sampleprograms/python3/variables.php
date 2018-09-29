@@ -1,5 +1,17 @@
-<?php session_start();
-include "../../connect.php"; ?>
+<?php
+
+/**
+ *
+ * Page to display variables sample program for Python 3
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+//  Start PHP session
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,13 +24,17 @@ include "../../connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php include ("../../header.html"); ?>
+    <?php
+
+//      Include the special header file with fixed links for the tutorial pages
+        include ("../header.html");
+
+    ?>
     <br/>
     <br/>
     <div class = "container">
         <div class = "row">
             <h1>Example of variables - Python3</h1>
-            <!--Aghhhh, all links and references break because its in a seperate directory to literaly everything-->
         </div>
     </div>
     <br/>
