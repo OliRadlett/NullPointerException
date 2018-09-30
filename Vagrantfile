@@ -93,13 +93,15 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y php7.1
     sudo apt-get install -y php7.1-mysqli
+    sudo apt-get install -y php7.1-xdebug
     sudo apt-get update
     sudo apt-get upgrade -y
     sudo apt-get autoremove -y
-    # Show PHP errors
+    # Show PHP errors and setup xdebug
     sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/cli/php.ini
     sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/cli/php.ini
     sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/apache2/php.ini
+    sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/apache2/php.ini
     sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/apache2/php.ini
     # Enable MySQLi
     phpenmod mysqli
