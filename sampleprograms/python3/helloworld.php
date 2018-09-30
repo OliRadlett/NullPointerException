@@ -1,5 +1,17 @@
-<?php session_start();
-include "../../connect.php"; ?>
+<?php
+
+/**
+ *
+ * Page to display hello world sample program for Python 3
+ *
+ * @author Oli Radlett <o.radlett@gmail.com>
+ *
+ */
+
+//  Start PHP session
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +24,12 @@ include "../../connect.php"; ?>
     <title>NullPointerException</title>
 </head>
 <body>
-    <?php include ("../../header.html"); ?>
+    <?php
+
+//      Include the special header file with fixed links for the tutorial pages
+        include ("../header.html");
+
+    ?>
     <br/>
     <br/>
     <div class = "container">
@@ -34,7 +51,7 @@ include "../../connect.php"; ?>
         <div class = "row">
           <div class = "col-lg-12">
             <p>
-              This example shows the traditional "Hello World!" program, written in Python3. It's incredibly simple, and works by calling the inbuild <i>print</i> function, and supplying the string <i>"Hello World!"</i> as the parameter. This produces the output:
+              This example shows the traditional "Hello World!" program, written in Python3. It's incredibly simple, and works by calling the in-built <i>print</i> function, and supplying the string <i>"Hello World!"</i> as the parameter. This produces the output:
             </p>
             <pre>
               <code class = "language-python">

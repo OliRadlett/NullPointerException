@@ -2,7 +2,7 @@
 
 /**
  *
- * Page to display variables sample program for Python 3
+ * Page to display functions sample program for Python 3
  *
  * @author Oli Radlett <o.radlett@gmail.com>
  *
@@ -34,7 +34,7 @@ session_start();
     <br/>
     <div class = "container">
         <div class = "row">
-            <h1>Example of variables - Python3</h1>
+            <h1>Examples of functions - Python3</h1>
         </div>
     </div>
     <br/>
@@ -43,10 +43,12 @@ session_start();
             <div class = "col-lg-12">
                 <pre>
                   <code class = "language-python">
-                    Integer = 12
-                    String = "Test string"
-                    Boolean = True
-                    Float = 7.9264
+                    def say_hello():
+
+                      print ("Hello!")
+
+
+                    say_hello()
                   </code>
                 </pre>
             </div>
@@ -54,9 +56,16 @@ session_start();
         <div class = "row">
           <div class = "col-lg-12">
             <p>
-              This example shows how to declare variables of 4 common data types in Python3. In Python3, you don't need to specify the data type of a variable when you initialise it. This means that all variables are defined in the same way. Variables can also be initialised but not set to any value by setting it to equal None.
+                This example demonstrates how a basic function works in Python3. A function is block of code that you can reuse multiple times. In this example, we declare a new function called <i>say_hello</i> by using the <i>def</i> keyword. Inside the function body we make a call to the in-built <i>print</i> function to output the message <i>Hello!</i>. We then call the function.
             </p>
+            <p>
+                This example produces the output
             </p>
+            <pre>
+              <code class = "language-python">
+                Hello!
+              </code>
+            </pre>
           </div>
         </div>
     </div>
