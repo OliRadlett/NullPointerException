@@ -32,10 +32,10 @@ function download() {
 
         // Create a new XMLHTTPRequest object
         httpRequest = new XMLHttpRequest();
-        // Create the request URL based of the query assigned above
+        // Create the request URL based on the query assigned above
         url = "/downloadsearchq.php?q=" + query;
 
-        // Check for errors
+        // Check for errors with the XMLHttpRequest object
         if (!httpRequest) {
 
             console.log("Error: could not create XMLHttpRequest object");

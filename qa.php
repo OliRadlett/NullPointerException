@@ -32,7 +32,7 @@ include "database.php";
             <div class="col-sm-8">
                 <div class="form-group">
                     <label>Filter questions:</label>
-                    <select id = "select" class="form-control" onchange = "Download()">
+                    <select id = "select" class="form-control" onchange = "download()">
                         <option>Hot</option>
                         <option>Top</option>
                         <option>New</option>
