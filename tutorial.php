@@ -50,6 +50,9 @@ $database = new Database();
                 <li>
                     <a class = "link" href = "python3.php">Python 3</a>
                 </li>
+                <li>
+                    More languages coming soon...
+                </li>
             </ul>
         </div>
     </div>
