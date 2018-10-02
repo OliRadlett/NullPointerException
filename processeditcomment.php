@@ -47,7 +47,8 @@
 
     }
 
-    if ($database->numRows() !== 1) {
+//  If no rows returned from database then user isn't blocked
+    if ($database->numRows() !== 0) {
 
 //      Check if the edited comment contains text or not
         if (!empty($comment)) {
