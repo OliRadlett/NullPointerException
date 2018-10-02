@@ -13,6 +13,8 @@ if (window.logged_in === "true") {
 let UpArrow = $("#UpArrow");
 let DownArrow = $("#DownArrow");
 
+let currentState;
+
 $(function(){
 
   Download();
@@ -23,7 +25,7 @@ function Download() {
 
     $.get("downloadquestionvotes.php?qid=" + qID + "&username=" + username + "&_=" + Math.random(), (data) => {
 
-        window.current = data;
+        currentState = data;
 
         switch (data) {
 
@@ -127,7 +129,7 @@ function UpToDown() {
 
 function Up() {
 
-    switch (window.current) {
+    switch (currentState) {
 
         case "up":
             RemoveVote();
@@ -147,7 +149,7 @@ function Up() {
 
 function Down() {
 
-    switch (window.current) {
+    switch (currentState) {
 
         case "down":
             RemoveVote();
