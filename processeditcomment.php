@@ -38,8 +38,10 @@
 
 //  Prepare and run a MySQL query to check if the user has been banned
     $database->query("SELECT `address` FROM `blocked_ipaddr` WHERE `address` = '$address'");
+    $blocked = $database->numRows();
 
-    if (!isUsersComment($database, $username, $id)) {
+//  Use new Database object to prevent conflicts with local instance
+    if (!isUsersComment(new Database(), $username, $id)) {
 
 //    Close headers and redirect the user to an error page
       session_write_close();
@@ -47,7 +49,8 @@
 
     }
 
-    if ($database->numRows() !== 1) {
+//  If no rows returned from database then user isn't blocked
+    if ($blocked == 0) {
 
 //      Check if the edited comment contains text or not
         if (!empty($comment)) {
