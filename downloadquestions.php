@@ -13,9 +13,8 @@ if ($type == "new") {
 } else if ($type == "top"){
     $query = "SELECT * FROM `questions` ORDER BY `votes` DESC LIMIT 10";
 } else if ($type == "hot"){
-    // Hmmmm, does limiting the selection to the first 10 only process the question 1-10 and ignore anything asked after the first 10?
-    // Maybe it should be limited to 10 after the processing has been completed.
-    $query = "SELECT * FROM `questions` LIMIT 10";
+//  No LIMIT 10 because processing is done in the script not the query
+    $query = "SELECT * FROM `questions`";
 }
 $database->query($query);
 if ($type !== "hot") {
@@ -43,7 +42,7 @@ function hot(Database $database) {
         array_push($array, array("score"=>$score, "question"=>$row["title"], "id"=>$row["id"], "votes"=>$row["votes"]));
     }
     usort($array, "sortOrder");
-    for ($i = 0; $i < count($scoreArray); $i++){
+    for ($i = 0; $i < 10; $i++){
         echo $array[$i]["question"] . " <br/>";
         echo $array[$i]["id"] . " <br/>";
         echo $array[$i]["votes"] . "<br/>";
