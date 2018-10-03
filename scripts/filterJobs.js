@@ -25,6 +25,8 @@ function addTagToFilter() {
         newTag.setAttribute("onclick", "removeTag('" + tag + "')");
         tagsDiv.appendChild(newTag);
 
+        downloadJobs();
+
         tagInputBox.value = "";
         addTagButton.setAttribute("hidden", "true");
 
@@ -87,5 +89,32 @@ function removeTag(tag) {
     document.getElementById(tag).remove();
     let index = currentTags.indexOf(tag)
     currentTags.splice(index, 1);
+    downloadJobs();
+
+}
+
+function downloadJobs() {
+
+    let tagsStr = "";
+    let httpRequest = new XMLHttpRequest();
+    let url = "";
+
+    for (let i = 0; i < currentTags.length; i++) {
+
+        tagsStr += currentTags[i];
+
+        if (i !== currentTags.length - 1) {
+
+            tagsStr += ",";
+
+        }
+
+    }
+
+    console.log("Tags String: " + tagsStr);
+
+    url = "downloadJobs.php?tags=" + tagsStr;
+
+    console.log("GET URL: " + url);
 
 }
