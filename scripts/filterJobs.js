@@ -21,9 +21,12 @@ function addTagToFilter() {
         let newTagNode = document.createTextNode(tag);
         newTag.appendChild(newTagNode);
         newTag.setAttribute("class", "tags");
+        newTag.setAttribute("id", tag);
+        newTag.setAttribute("onclick", "removeTag('" + tag + "')");
         tagsDiv.appendChild(newTag);
 
         tagInputBox.value = "";
+        addTagButton.setAttribute("hidden", "true");
 
     }
 
@@ -76,5 +79,13 @@ function getTags() {
 
     httpRequest.open("GET", url);
     httpRequest.send();
+
+}
+
+function removeTag(tag) {
+
+    document.getElementById(tag).remove();
+    let index = currentTags.indexOf(tag)
+    currentTags.splice(index, 1);
 
 }
