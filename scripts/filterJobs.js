@@ -1,6 +1,7 @@
 let tagInputBox = document.getElementById("tag-input");
 let addTagButton = document.getElementById("addTagButton");
 let tagsDiv = document.getElementById("tagsDiv");
+let jobsTable = document.getElementById("jobsTable");
 let tagsArray;
 let currentTags = [];
 
@@ -87,7 +88,7 @@ function getTags() {
 function removeTag(tag) {
 
     document.getElementById(tag).remove();
-    let index = currentTags.indexOf(tag)
+    let index = currentTags.indexOf(tag);
     currentTags.splice(index, 1);
     downloadJobs();
 
@@ -116,5 +117,77 @@ function downloadJobs() {
     url = "downloadJobs.php?tags=" + tagsStr;
 
     console.log("GET URL: " + url);
+
+    if (!httpRequest) {
+
+        console.log("Error: could not create XMLHttpRequest object");
+        return false;
+
+    }
+
+    httpRequest.onreadystatechange = function() {
+
+        outputJobs(httpRequest);
+
+    };
+
+    httpRequest.open("GET", url);
+    httpRequest.send();
+
+}
+
+function outputJobs(httpRequest) {
+
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+        if (httpRequest.status === 200) {
+
+            let request = httpRequest.response;
+            let jobsArray = request.split("<br/>");
+
+            wipeTable(jobsTable);
+
+            createJobElements(jobsArray, jobsTable);
+
+        } else {
+
+            // Error
+            console.log("Error: There was a problem with the request");
+
+        }
+
+    }
+
+}
+function createJobElements(jobsArray, table) {
+
+
+    for (let i = 0; i < jobsArray.length - 1; i += 5) {
+
+        let tr = document.createElement("tr");
+        let title = document.createElement("td");
+        let location = document.createElement("td");
+        let salary = document.createElement("td");
+        let tags = document.createElement("td");
+        let link = document.createElement("a");
+        let titleString = document.createTextNode(jobsArray[i + 1]);
+        let locationString = document.createTextNode(jobsArray[i + 2]);
+        let salaryString = document.createTextNode("£" + jobsArray[i + 3]);
+        let tagsStr = jobsArray[i + 4];
+        tagsStr = tagsStr.replace(/,/g, ", ");
+        let tagsString = document.createTextNode(tagsStr);
+
+        link.setAttribute("href", "/job.php?id=" + jobsArray[i]);
+        link.appendChild(titleString);
+        link.setAttribute("style", "text-decoration: none");
+        link.setAttribute("style", "color: #0078D7");
+        title.appendChild(link);
+        location.appendChild(locationString);
+        salary.appendChild(salaryString);
+        tags.appendChild(tagsString);
+        appendChildren(tr, title, location, salary, tags)
+        table.appendChild(tr);
+
+    }
 
 }

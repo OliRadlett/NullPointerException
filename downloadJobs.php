@@ -8,10 +8,13 @@
     $tagsArray = explode(",", $tagsStr);
 
     $matchingQuestionIDs = array();
+    $jobs = array();
 
     $database->query("SELECT * FROM npe.jobs");
 
     while ($result = $database->fetchAssoc()) {
+
+        array_push($jobs, $result);
 
         $jobTags = $result["tags"];
         $jobID = $result["id"];
@@ -39,9 +42,24 @@
 
     $matchingQuestionIDs = array_unique($matchingQuestionIDs);
 
-    for ($i = 0; $i < sizeof($matchingQuestionIDs); $i++) {
+    foreach ($jobs as $key => $value) {
 
-        echo $matchingQuestionIDs[$i] . "<br/>";
+        $job = $jobs[$key];
+        $jobID = $job["id"];
+
+        for ($i = 0; $i < sizeof($matchingQuestionIDs); $i++) {
+
+            if ($jobID == $matchingQuestionIDs[$i]) {
+
+                echo $job["id"] . "<br/>";
+                echo $job["title"] . "<br/>";
+                echo $job["location"] . "<br/>";
+                echo $job["salary"] . "<br/>";
+                echo $job["tags"] . "<br/>";
+
+            }
+
+        }
 
     }
 
