@@ -32,7 +32,7 @@ function download() {
     // Create a new XMLHttpRequest object
     httpRequest = new XMLHttpRequest();
     // Create the request URL based on the filter button calculated above
-    url = "/downloadquestions.php?type=" + type;
+    url = "downloadquestions.php?type=" + type;
 
     // Check for errors with the XMLHttpRequest object
     if (!httpRequest) {

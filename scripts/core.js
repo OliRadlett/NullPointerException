@@ -58,7 +58,7 @@ function createElements(questionArray, table) {
 
         // Set the attributes and properties of each element
         // Append the elements to their parents
-        link.setAttribute("href", "/question.php?id=" + questionArray[i + 1]);
+        link.setAttribute("href", "question.php?id=" + questionArray[i + 1]);
         link.appendChild(titleString);
         link.setAttribute("style", "text-decoration: none");
         link.setAttribute("style", "color: #0078D7");

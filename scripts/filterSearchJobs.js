@@ -33,7 +33,7 @@ function download() {
         // Create a new XMLHTTPRequest object
         httpRequest = new XMLHttpRequest();
         // Create the request URL based on the query assigned above
-        url = "/downloadsearchjobs.php?q=" + query;
+        url = "downloadsearchjobs.php?q=" + query;
 
         // Check for errors with the XMLHttpRequest object
         if (!httpRequest) {

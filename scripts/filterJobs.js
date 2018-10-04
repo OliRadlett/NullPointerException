@@ -59,7 +59,7 @@ function showAddTagButton() {
 function getTags() {
 
     let httpRequest = new XMLHttpRequest();
-    let url = "/downloadTags.php";
+    let url = "downloadTags.php";
 
     if (!httpRequest) {
 
@@ -192,7 +192,7 @@ function createJobElements(jobsArray, table) {
         tagsStr = tagsStr.replace(/,/g, ", ");
         let tagsString = document.createTextNode(tagsStr);
 
-        link.setAttribute("href", "/job.php?id=" + jobsArray[i]);
+        link.setAttribute("href", "job.php?id=" + jobsArray[i]);
         link.appendChild(titleString);
         link.setAttribute("style", "text-decoration: none");
         link.setAttribute("style", "color: #0078D7");
