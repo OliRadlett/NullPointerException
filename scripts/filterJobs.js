@@ -5,7 +5,12 @@ let jobsTable = document.getElementById("jobsTable");
 let tagsArray;
 let currentTags = [];
 
-window.onload = getTags;
+window.onload = function() {
+
+    getTags();
+    downloadNewestJobs();
+
+};
 
 function addTagToFilter() {
 
@@ -90,7 +95,16 @@ function removeTag(tag) {
     document.getElementById(tag).remove();
     let index = currentTags.indexOf(tag);
     currentTags.splice(index, 1);
-    downloadJobs();
+
+    if (currentTags.length > 0) {
+
+        downloadJobs();
+
+    } else {
+
+        downloadNewestJobs();
+
+    }
 
 }
 
@@ -159,6 +173,7 @@ function outputJobs(httpRequest) {
     }
 
 }
+
 function createJobElements(jobsArray, table) {
 
 
@@ -189,5 +204,28 @@ function createJobElements(jobsArray, table) {
         table.appendChild(tr);
 
     }
+
+}
+
+function downloadNewestJobs() {
+
+    let httpRequest = new XMLHttpRequest();
+    let url = "downloadNewJobs.php";
+
+    if (!httpRequest) {
+
+        console.log("Error: could not create XMLHttpRequest object");
+        return false;
+
+    }
+
+    httpRequest.onreadystatechange = function() {
+
+        outputJobs(httpRequest);
+
+    };
+
+    httpRequest.open("GET", url);
+    httpRequest.send();
 
 }
