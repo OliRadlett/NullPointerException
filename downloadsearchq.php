@@ -12,7 +12,7 @@
 include "database.php";
 
 // Create a new Database object
-$database = Database();
+$database = new Database();
 
 // Get search query from URL
 $q = $_GET["q"];
