@@ -46,7 +46,7 @@ include ("header.html");
         <div class = "col-sm-2"></div>
         <div class = "col-sm-2">
             <br/>
-            <button id = "large_button" class = "text-right btn btn-primary" onclick = "window.location.href = '';"><h5>Search jobs</h5></button>
+            <button id = "large_button" class = "text-right btn btn-primary" onclick = "window.location.href = 'searchJobs.php';"><h5>Search jobs</h5></button>
         </div>
     </div>
     <div class = "row">
