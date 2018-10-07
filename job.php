@@ -59,6 +59,8 @@ while($row = $database->fetchAssoc()) {
 }
 
 $jTags = str_replace(",", ", ", $jTags);
+// Replace broken apostrophe used in StackOverflow when copying jobs across for demo purposes
+$jDescription = str_replace("’", "'", $jDescription);
 
 ?>
 <div class = "container">
