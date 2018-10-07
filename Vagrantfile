@@ -93,6 +93,10 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y php7.1
     sudo apt-get install -y php7.1-mysqli
+    # Install and update locale
+    sudo apt-get install language-pack-en
+    sudo /usr/share/locales/./install-language-pack en_GB.UTF-8
+    sudo dpkg-reconfigure locales
     sudo apt-get update
     sudo apt-get upgrade -y
     sudo apt-get autoremove -y
