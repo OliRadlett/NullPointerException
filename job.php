@@ -117,5 +117,8 @@ $jTags = str_replace(",", ", ", $jTags);
             ?>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </div>
 </body>
