@@ -13,7 +13,12 @@ session_start();
 include "database.php";
 
 // Set locale for currency formatting
-setLocale(LC_ALL, 'en_GB.utf8', 'en_GB');
+// Seems hacky and im not sure how/why it works but this approach seems to make special chars and £ sign render correctly
+setLocale(LC_ALL, 'en_GB.UTF-8');
+
+// Allow special chars used in StackOverflow when copying jobs across for demo purposes
+// Seems hacky and im not sure how/why it works but this approach seems to make special chars and £ sign render correctly
+header('Content-Type: text/html; charset=ISO-8859-1');
 
 ?>
 
@@ -59,8 +64,6 @@ while($row = $database->fetchAssoc()) {
 }
 
 $jTags = str_replace(",", ", ", $jTags);
-// Replace broken apostrophe used in StackOverflow when copying jobs across for demo purposes
-$jDescription = str_replace("’", "'", $jDescription);
 
 ?>
 <div class = "container">
@@ -91,7 +94,9 @@ $jDescription = str_replace("’", "'", $jDescription);
             <h6>
                 <?php
 
-                    echo money_format('%.2n', $jSalary);
+//                    echo money_format('%.2n', $jSalary);
+//                Seems hacky and im not sure how/why it works but this approach seems to make special chars and £ sign render correctly
+                    echo utf8_decode("£") . number_format($jSalary, 0);
 
                 ?>
             </h6>
