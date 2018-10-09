@@ -62,6 +62,9 @@ if (!isset($_SESSION["username"])) {
         <button type="submit" class="btn btn-primary">List job</button>
     </form>
 </div>
+<br/>
+<br/>
+<br/>
 
 <!--Keep at end of document for page load times-->
 <script type="text/javascript" src = "scripts/salary.js"></script>
