@@ -86,14 +86,19 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", env: {"USERNAME" => Username.new, "PASSWORD" => Password.new},  inline: <<-SHELL
     # Install packages
-    sudo apt-get update
+    sudo apt-get update -y
     sudo apt-get install -y apache2
     sudo apt-get install -y git
     sudo add-apt-repository -y ppa:ondrej/php
-    sudo apt-get update
+    sudo apt-get update -y
     sudo apt-get install -y php7.1
     sudo apt-get install -y php7.1-mysqli
-    sudo apt-get update
+    sudo apt-get install -y php7.1-xml
+    # Install and update locale
+    sudo apt-get install -y language-pack-en
+    sudo /usr/share/locales/./install-language-pack en_GB.UTF-8
+    sudo dpkg-reconfigure locales
+    sudo apt-get update -y
     sudo apt-get upgrade -y
     sudo apt-get autoremove -y
     # Show PHP errors

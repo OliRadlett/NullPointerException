@@ -70,7 +70,7 @@ include "database.php";
             <h2>Careers</h2>
             <p>Bringing together employers and employees to match talent and vacancies.</p>
             <p>NullPointerException allows people looking for a job to showcase their own experience and targets relevant jobs at them, and allows employers to find the perfect employees to fill their vacancies.
-            <p><a class="btn btn-secondary" href="#" role="button">Go to Careers &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="career.php" role="button">Go to Careers &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <h2>Tutorial Zone</h2>
