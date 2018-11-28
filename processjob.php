@@ -19,15 +19,16 @@
 
     $jobSalary = intval($jobSalary);
 
-    if (Util::_isset($jobTitle, $jobDescription, $jobLocation, $jobSalary, $jobTags))
-    {
+    if ($jobTitle && $jobDescription && $jobCompany && $jobLocation && $jobSalary && $jobTags) {
 
         $database->query("INSERT INTO npe.jobs(`title`, `description`, `company`, `location`, `salary`, `tags`) VALUES ('$jobTitle', '$jobDescription', '$jobCompany', '$jobLocation', $jobSalary, '$jobTags');");
 
         Util::redirect("/findjobs.php");
 
-    }
+    } else {
 
-    //TODO Add comments and more validation
+        Util::Error("Please make sure you have filled in every field", true, "findpeople.php");
+
+    }
 
 ?>
