@@ -74,7 +74,7 @@ class Database {
 		} else {
 
 			// Throws exception on error
-			throw new Exception("Error executing query " . $this->query);
+			throw new Exception(mysqli_error($this->connection));
 			
 
 		}
