@@ -34,7 +34,7 @@ session_start();
     <br/>
     <div class = "container">
         <div class = "row">
-            <h1>Examples of functions - Python3</h1>
+            <h1>Examples of classes - Python3</h1>
         </div>
     </div>
     <br/>
