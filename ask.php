@@ -35,7 +35,7 @@ include "database.php";
     <br />
     <br />
     <div class = "container">
-        <form method = "post" action = "/processquestion.php">
+        <form method = "post" action = "processquestion.php">
             <div class="form-group">
                 <label><u>Title:</u></label>
                 <input type = "text" class = "form-control" placeholder="Question title" name = "title"/>

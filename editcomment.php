@@ -61,7 +61,7 @@ include "questionFuncs.php"
     <br />
     <br />
     <div class = "container">
-        <form method = "post" action = <?php echo "'/processeditcomment.php?id=" . $_GET["id"] . "&qid=" . $_GET["qid"] . "'"; ?>>
+        <form method = "post" action = <?php echo "'processeditcomment.php?id=" . $_GET["id"] . "&qid=" . $_GET["qid"] . "'"; ?>>
             <div class="form-group">
                 <label><u>Comment:</u></label>
                 <input type = "text" class = "form-control" value=<?php echo "'" . GetComment($database, $_GET["id"]) . "'";?> placeholder=<?php echo "'" . GetComment($database, $_GET["id"]) . "'";?> name = "comment"/>
