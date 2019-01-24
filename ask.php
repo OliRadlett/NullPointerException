@@ -24,7 +24,7 @@ include "database.php";
         if (!isset($_SESSION["username"])) {
 
             session_write_close();
-            header("Location: /error.php?error=notloggedin");
+            header("Location: error.php?error=notloggedin");
 
         }
 
