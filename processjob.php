@@ -23,7 +23,7 @@
 
         $database->query("INSERT INTO npe.jobs(`title`, `description`, `company`, `location`, `salary`, `tags`) VALUES ('$jobTitle', '$jobDescription', '$jobCompany', '$jobLocation', $jobSalary, '$jobTags');");
 
-        Util::redirect("/findjobs.php");
+        Util::redirect("findjobs.php");
 
     } else {
 

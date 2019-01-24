@@ -44,4 +44,4 @@ echo "Error: " . $msg;
 ?>
 <br />
 <!--Display a back to homepage button-->
-<button onclick = "window.location.href = '/index.php'">Home</button>
+<button onclick = "window.location.href = 'index.php'">Home</button>

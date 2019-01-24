@@ -52,7 +52,7 @@
     <br />
     <br />
     <div class = "container">
-        <form method = "post" action = <?php echo "'/processcomment.php?id=" . $_GET["id"] . "'"; ?>>
+        <form method = "post" action = <?php echo "'processcomment.php?id=" . $_GET["id"] . "'"; ?>>
             <div class="form-group">
                 <label><u>Comment:</u></label>
                 <input type = "text" class = "form-control" placeholder="Comment..." name = "comment"/>

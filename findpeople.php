@@ -27,7 +27,7 @@ include ("header.html");
 if (!isset($_SESSION["username"])) {
 
     session_write_close();
-    header("Location: /error.php?error=notloggedin");
+    header("Location: error.php?error=notloggedin");
 
 }
 
@@ -36,7 +36,7 @@ if (!isset($_SESSION["username"])) {
 <br />
 <br />
 <div class = "container">
-    <form method = "post" action = "/processjob.php?tags=[]" id="main-form">
+    <form method = "post" action = "processjob.php?tags=[]" id="main-form">
         <div class="form-group">
             <label><u>Job title:</u></label>
             <input type = "text" class = "form-control" placeholder="Job title..." name = "title"/>
