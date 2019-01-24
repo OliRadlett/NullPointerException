@@ -32,9 +32,13 @@ if ($returnedUser) {
 	} else {
 
 //	    Show error message plus back button
-	    Util::Error("Password incorrect", true, "signup.php");
+	    Util::Error("Username/password combination does not exist", true, "signup.php");
 
     }
+
+} else {
+
+    Util::Error("Username/password combination does not exist", true, "signup.php");
 
 }
 
