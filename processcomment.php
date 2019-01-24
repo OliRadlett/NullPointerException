@@ -48,7 +48,7 @@ if ($database->numRows() !== 1) {
         $database->query("INSERT INTO `comments` (`qid`, `comment`, `votes`, `time`, `author`) VALUES ('$id', '$comment', '1', '$time', '$username')");
 //      Close headers and redirect the user back to the question they commented on
         session_write_close();
-        Util::redirect("/question.php?id=$id");
+        Util::redirect("question.php?id=$id");
 
     } else {
 
