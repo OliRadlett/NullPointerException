@@ -28,7 +28,7 @@ class Database {
 		*/
 
 		// Load database config from ini file
-		$config = parse_ini_file('../private/config.ini'); 
+		$config = parse_ini_file('../../private/config.ini'); 
     
     	// Read config from loaded ini file
 	    $db_server = $config["server"];
@@ -74,7 +74,7 @@ class Database {
 		} else {
 
 			// Throws exception on error
-			throw new Exception(mysqli_error($this->connection));
+			throw new Exception("Error executing query '" . $this->query . "', " . mysqli_error($this->connection));
 			
 
 		}
