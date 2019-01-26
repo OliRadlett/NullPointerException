@@ -1,0 +1,7 @@
+start php session
+include database class
+include universal page header
+is no user logged in
+	redirect the user to an error page
+if not
+	show rest of page

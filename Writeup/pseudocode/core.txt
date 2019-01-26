@@ -1,0 +1,71 @@
+user class
+	register member variables
+	constructor function
+		set member properties based on parameters
+		was a password provided
+			generate a hash based on the provided password
+		if not
+			was a password hash provided
+				store the password hash
+	get password function
+		return the password member variable
+	get password hash function
+		return the password hash member variable
+	get username function
+		return the username member variable
+	get first name function
+		return the first name member variable
+	get last name function
+		return the last name member variable
+	get email function
+		return the email address member variable
+	generate hash function
+		generate a hash of the password member variable
+		return the hash that's just been generated
+	verify hash function
+		if the hash matches the password
+			return true
+		if not
+			return false
+	get id function
+		query the database to find the id of a user
+		return the result
+	all attributes filled function
+		are all the member variables not null
+			return true
+		if not
+			return false
+	create a user function
+		generate a new hash of the password
+		insert the user into the database
+		query the database to find the id of a user
+		log the user in
+		close the php session
+		redirect the user back to the homepage
+util class
+	redirect function
+		have HTTP headers been sent
+			use header function to rediect the user
+		if not
+			use a script to redirect the user
+	is an ip addressed blocked function
+		query the database to check if the user bas been blocked
+		has the user been blocked
+			return true
+		if not
+			return false
+	multiple isset function
+		loop through all parameters
+			is the variable null
+				return false
+		return true
+	is email address valid function
+		is the email address provided valid
+			return true
+		if not
+			return false
+	error message function
+		output the error message
+		output a newline
+		do we want to display a back button
+			output a back button

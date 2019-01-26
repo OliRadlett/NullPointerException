@@ -1,0 +1,26 @@
+database class
+	set up member variables
+	constructor function
+		read connection Strings from .ini file
+		use connection Strings to connect to database
+		throw exception if cannot connect to database
+	query function
+		store query from parameter in the class
+		run the query
+		store the result of the query in the class
+		if there is a result from the query
+			return the result
+		if not
+			throw exception if error
+	get result function
+		return the result member variable
+	get query function
+		return the query member variable
+	get connection function
+		return the connection member variable
+	fetch associative array function
+		if there is a result
+			return an associative array of the result
+	number of rows function
+		if there is a result
+			return the number of rows returned in the result

@@ -1,0 +1,4 @@
+include database class
+connect to the database
+get the tags from the URL
+create an array from the tags

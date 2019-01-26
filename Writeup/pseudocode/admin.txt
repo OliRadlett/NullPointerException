@@ -1,0 +1,7 @@
+start php session
+include database class
+connect to database
+if user is an admin
+	show admin page
+if not
+	redirect the user away from the page without showing anything

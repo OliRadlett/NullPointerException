@@ -1,0 +1,9 @@
+start php session
+include database class
+include core class
+include universal page header
+is no user logged in
+	close the php session
+	redirect the user to an error page
+if not
+	show the rest of the page
