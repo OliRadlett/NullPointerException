@@ -1,0 +1,5 @@
+include the database class
+connect to the database
+download all the tags from the database
+iterate over the results returned from the database
+	output each tag

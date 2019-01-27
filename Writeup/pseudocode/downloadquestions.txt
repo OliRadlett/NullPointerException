@@ -1,0 +1,20 @@
+start a php session
+include the database class
+connect to the database
+get the filter from the URL
+if the filter is new
+	download the 10 newest questions from the database
+	run the not hot function
+if the filter is top
+	download the 10 highest voted questions from the database
+	run the not hot function
+if the filter is hot
+	download all the questions
+	run the hot function
+hot function
+	iterate over the questions returned from the database
+		calculate the score of each questions based on the time it was asked and the number of votes
+		output the question details
+not hot function
+	iterate over the questions returned from the database
+		output the question details

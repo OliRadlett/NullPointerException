@@ -1,0 +1,6 @@
+if the error is specified in the URL
+	set the error member variable to the error in the URL
+if not
+	create an empty error member variable
+switch over the error
+	show the correct error message based on the error 

@@ -1,0 +1,8 @@
+start a new php session
+include the database class
+include the core class
+connect to the database
+check if the user exists in the database
+if the password matches the hash stored in the database
+	log the user in
+show an error message

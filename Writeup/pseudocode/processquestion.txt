@@ -1,0 +1,19 @@
+start a new php session
+include database class
+include core class
+connect to the database
+get the question title from POST data
+get the question body from POST data
+get the username from SESSION data
+get the current time
+get the user's IP address from SESSION data
+has the user been blocked
+	close the php session
+	redirect the user to an error message
+if the question title and body have been filled out
+	insert the question into the database
+	close the php session
+	redirect the user to the question and answer homepage
+if not
+	close the php session
+	redirect the user to an error page

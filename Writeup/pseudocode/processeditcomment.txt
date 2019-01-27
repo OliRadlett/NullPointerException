@@ -1,0 +1,21 @@
+start a new php session
+include the database class
+include the core class
+include the quesion functions class
+connect to the database
+get the id from the URL
+get the comment from POST data
+get the username from SESSION data
+get the current UNIX time
+get the user's IP address from SESSION data
+check if the user has been blocked
+if the user has been blocked
+	close the php session
+	redirect the user to an error page
+check if the comment it empty
+if the comment is empty
+	close the php session
+	redirect the user to an error page
+modify the comment in the database
+close the php session
+redirect the user to the homepage

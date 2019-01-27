@@ -1,0 +1,4 @@
+include the database class
+connect to the database
+select the 10 newest jobs frm the database
+output the details for the downloaded jobs

@@ -1,0 +1,21 @@
+start php session
+include database class
+include core class
+connect to the the database
+create a new user object from POST data
+if the user has been blocked
+	close the php session
+	redirect the user to an error page
+if all the attributes have been filled
+	if the email address is valid
+		if the username is unique
+			create the user
+		if not
+			close the php session
+			redirect the user to an error page
+	if not
+		close the php session
+		redirect the user to an error page
+if not
+	close the php session
+	redirect the user to an error page

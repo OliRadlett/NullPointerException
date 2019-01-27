@@ -2,3 +2,12 @@ include database class
 connect to the database
 get the tags from the URL
 create an array from the tags
+download jobs from the database
+iterate over the jobs downloaded from the database
+	add each result to an array
+	get the tags from each result
+	add the jobs that have matching tags to an array
+remove duplicate values from the matching jobs array
+iterate over the jobs downloaded from the database
+	if the job's id is in the matching job id array
+		output the job details

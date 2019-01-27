@@ -1,0 +1,8 @@
+start a new php session
+include the database class
+connect to the database
+collect the user's IP address
+get the current time
+get the current date
+insert time, date and IP address into the database
+include the universal header

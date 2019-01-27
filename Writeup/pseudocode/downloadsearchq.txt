@@ -1,0 +1,6 @@
+include the database class
+connect to the database
+get the search query from the URL
+search the database based on the search query
+iterate over the results returned from the database
+	output each question returned from the database

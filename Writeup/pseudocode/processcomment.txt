@@ -1,0 +1,20 @@
+start a new php session
+include the database class
+include the core class
+get the id from the URL
+get the comment from POST data
+get the username from SESSION data
+get the current UNIX time
+get the user's IP address from SESSION data
+connect to the database
+check if the user has been blocked
+if the user has been blocked
+	close the php session
+	redirect the user to an error page
+check if the comment it empty
+if the comment is empty
+	close the php session
+	redirect the user to an error page
+insert the comment into the database
+close the php session
+redirect the user to the homepage

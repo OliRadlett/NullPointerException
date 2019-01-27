@@ -1,0 +1,7 @@
+include the database class
+connect to the database
+get the question id from the URL
+get the username from the URL
+get the user id from the database
+query the database to determine how the user voted on the question
+output how the user voted on the question

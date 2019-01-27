@@ -1,0 +1,12 @@
+start a php session
+include the database class
+include the core class
+include the question functions class
+connect to the database
+include the universal page header
+if the user isn't logged in
+	close the php session
+	redirect the user to an error page
+if the comment in question wasn't made by the user
+	close the php session
+	redirect the user to an error page

@@ -1,0 +1,16 @@
+start a new php session
+include the database class
+include the core class
+connect to the database
+get the job title from POST data
+get the job description from POST data
+get the job location from POST data
+get the job salary from POST data
+get the company from POST data
+get the job tags from the URL
+remove JavaScript formating from job tags
+if all the values are set
+	insert the job into the database
+	redirect the user to the find jobs page
+if not
+	show an error message

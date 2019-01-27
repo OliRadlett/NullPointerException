@@ -1,0 +1,4 @@
+start a new php session
+wipe the username session variable
+close the php session
+redirect the user to the homepage

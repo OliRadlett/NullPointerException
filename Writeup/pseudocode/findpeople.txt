@@ -1,0 +1,7 @@
+start a new php session
+include the database class
+connect to the database
+include the universal page header
+if the user isn't logged in
+	close the php session
+	redirect the user to an error page
