@@ -54,7 +54,7 @@ include ("header.html");
         <div class="col-lg-5">
             <h2>Looking for work</h2>
             <p>Get your skills and experience seen by the people who matter and find jobs that match your talents and passion.</p>
-            <p><a class="btn btn-secondary" href="findjobs.php" role="button">Find jobs &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="findjobs.php?#" role="button">Find jobs &raquo;</a></p>
         </div>
         <div class="col-lg-2"></div>
         <div class="col-lg-5">
